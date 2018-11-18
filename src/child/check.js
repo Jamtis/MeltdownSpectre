@@ -195,18 +195,20 @@ function check(num, data_array)
     }
 }
 
-function main() {
+function main(cache_size) {
     if (window.SharedArrayBuffer) {
         const data_array = [];
-        for (let i = 0; i < 20; ++i) {
+        for (let i = 0; i < 50; ++i) {
             data_array[i] = Math.random() * 256 | 0;
         }
         check(cache_size, data_array);
     } else {
-        parent.postMessage([0, null], "*");
+        parent.postMessage([0, null, cache_size], "*");
     }
 }
 
-const cache_size = parseFloat(location.search.substr(1));
-
-setTimeout(main, 50);
+// setTimeout(main, 50);
+addEventListener("message", event => {
+    const cache_size = event.data;
+    main(cache_size);
+});

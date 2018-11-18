@@ -1,19 +1,29 @@
 export default
-async function divideInterval([interval_start, interval_end], length, getter) {
+async function divideInterval(options) {
+    let {
+        interval: [interval_start, interval_end],
+        length,
+        getter,
+        min_step_width
+    } = options;
     const pairs = [];
     pairs.push([interval_start, await getter(interval_start)]);
     pairs.push([interval_end, await getter(interval_end)]);
     
     while (pairs.length < length) {
         pairs.sort(([a], [b]) => a - b);
-        let max_index = 0;
-        let max_value_difference = 0;
+        let max_index;
+        let max_value_difference = -Infinity;
         for (let i = 0; i < pairs.length - 1; ++i) {
             const value_difference = Math.abs(pairs[i + 1][1] - pairs[i][1]);
-            if (value_difference > max_value_difference) {
+            if (value_difference > max_value_difference && pairs[i + 1][0] - pairs[i][0] >= min_step_width) {
                 max_value_difference = value_difference;
                 max_index = i;
             }
+        }
+        if (max_index === undefined) {
+            min_step_width /= 2;
+            continue;
         }
         const max_interval_start = pairs[max_index][0];
         const max_interval_end = pairs[max_index + 1][0];
