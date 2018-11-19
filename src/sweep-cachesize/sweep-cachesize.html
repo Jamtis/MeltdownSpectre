@@ -7,7 +7,7 @@
         if ("serviceWorker" in navigator) {
             // Use the window load event to keep the page load performant
             window.addEventListener("load", () => {
-                navigator.serviceWorker.register("./sw.js");
+                navigator.serviceWorker.register("../sw.js");
             });
         }
     </script>
@@ -19,7 +19,7 @@
     <div id="rate-plot"></div>
     <div id="duration-plot"></div>
     <div id="storage"></div>
-    <script src="./index.js" type="module" async>
+    <script src="./sweep-cachesize.js" type="module" async>
     </script>
     <platinum-sw-register auto-register>
         <platinum-sw-cache></platinum-sw-cache>

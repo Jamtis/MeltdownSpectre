@@ -1,29 +1,25 @@
 const layout = {};
 
-export default storage => {
+export default (storage, trace_names) => {
     const x = [];
-    const ratio_y = [];
-    const rate_y = [];
-    const duration_y = [];
+    const traces = {};
+    for (const trace_name of trace_names) {
+        traces[trace_name] = [];
+    }
     const entries = Object.entries(storage);
     entries.sort(([a], [b]) => a - b);
     for (const [key, value] of entries) {
         const float_key = parseFloat(key);
         x.push(float_key);
-        ratio_y.push(value.ratio);
-        rate_y.push(value.rate);
-        duration_y.push(value.duration);
+        for (const trace_name of trace_names) {
+            traces[trace_name].push(value[trace_name]);
+        }
     }
-    Plotly.newPlot("ratio-plot", [{
-        x,
-        y: ratio_y
-    }], layout);
-    Plotly.newPlot("rate-plot", [{
-        x,
-        y: rate_y
-    }], layout);
-    Plotly.newPlot("duration-plot", [{
-        x,
-        y: duration_y
-    }], layout);
+    for (const trace_name of trace_names) {
+        Plotly.newPlot(trace_name + "-plot", [{
+            x,
+            y: traces[trace_name],
+            mode: "lines+markers"
+        }], layout);
+    }
 };

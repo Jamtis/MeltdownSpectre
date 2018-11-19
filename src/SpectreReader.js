@@ -1,13 +1,10 @@
-import download from "./download.js";
-import _console from "./console.js";
-import divideInterval from "./divideInterval.js";
-import plot from "./plot.js";
 import {zIndex} from "./math.js";
 
+export default
 class SpectreReader {
-    constructor(iteration_count, z_threshold) {
+    constructor(iteration_count, z_threshold, cache_duration) {
         // setup
-        this.worker = new Worker("./check-worker.js");
+        this.worker = new Worker("../check-worker.js");
         this.__iteration_count = iteration_count;
         this.__z_threshold = z_threshold;
         // iframe callback
@@ -38,7 +35,7 @@ correct data rate:\t${overall_rate} b/s`);
             // if (this.__current_iteration >= this.__iteration_count) {
                 const z_index = zIndex(this.__match_array);
                 console.log("z index:\t", z_index);
-                if (z_index  >= this.__z_threshold) {
+                if (z_index >= this.__z_threshold || this.__z_threshold === undefined) {
                     // result data
                     const result = {
                         duration: time_difference,
@@ -74,35 +71,4 @@ correct data rate:\t${overall_rate} b/s`);
         // return the promse that is resolved by the iframe callback
         return temp_promise;
     }
-}
-
-const interval = [0, 128];
-const length = 50;
-const cache_duration = 60;
-const iteration_count = 1e1;
-const z_threshold = 10;
-const min_step_width = .1;
-const spectre_reader = new SpectreReader(iteration_count, z_threshold);
-const storage = {};
-setTimeout(async () => {
-    const pairs = await divideInterval({
-        interval,
-        length,
-        getter: wrap_data,
-        min_step_width
-    });
-    download("spectre.json", JSON.stringify(storage));
-}, 500);
-
-async function wrap_data(cache_size) {
-    // perform spectre
-    const result = await spectre_reader.getDataAnalysis(cache_size);
-    // save result
-    storage[cache_size] = result;
-    // plot current state
-    plot(storage);
-    // display current state
-    document.querySelector("#storage").innerHTML += JSON.stringify(storage);
-    // return measure
-    return result.ratio;
 }
