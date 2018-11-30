@@ -6,7 +6,7 @@ export function mean(array) {
     return sum / array.length;
 };
 
-export function zIndex(array) {
+export function zIndex(array, value = 0) {
     let sum = 0;
     let ssum = 0;
     for (const value of array) {
@@ -17,7 +17,7 @@ export function zIndex(array) {
     // console.log("mean", mean);
     const deviation = (ssum - sum ** 2 / array.length) ** .5 / (array.length - 1);
     // console.log("deviation", deviation);
-    return mean / deviation;
+    return (value - mean) / deviation;
 };
 
 export function min(array) {
