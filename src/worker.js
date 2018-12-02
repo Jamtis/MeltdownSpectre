@@ -4,7 +4,7 @@ import readMemorySafely_promise from "./read-memory-safely.js";
 import readMemory_promise from "./read-memory.js";
 import timer_promise from "./timer.js";
 
-import flushCache from "./flush-cache.js";
+import evictCache from "./evict-cache.js";
 import wasm_configuration_promise from "./wasm-configuration.js";
 
 const storage = {};
@@ -25,8 +25,8 @@ self.c = 0;
     console.log("start tests");
     try {
         // probe_table[64 * page_size];
-        // await new Promise(resolve => setTimeout(resolve, 1e3));
-        readMemory(20, 82, .5);
+        await new Promise(resolve => setTimeout(resolve, 1e3));
+        readMemory(10, 82, .5);
         // await readMemorySafely(1);
         // const array = new Uint8Array(probe_table.buffer, 0, probe_table.length);
         // readMemory(1, 82, .5);

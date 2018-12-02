@@ -1,14 +1,14 @@
 const offset = 64;
 // prevent optimization
 let junk = 0;
-const size = 4 * (1 << 20);
+const size = 20 * 4 * (1 << 20);
 const dataview = new DataView(new ArrayBuffer(size));
-function flushCache() {
-    for (let i = 0; i < size / offset; ++i) {
+function evictCache(_size = size) {
+    for (let i = 0; i < _size / 4; ++i) {
         // read array value into cache
-        junk ^= dataview.getUint32(i * offset);
+        junk ^= dataview.getUint32(i);
     }
     return junk;
 }
 
-export default flushCache;
+export default evictCache;

@@ -27,6 +27,7 @@ export default (async () => {
                     console.error(error);
                 }
             }
+            console.log("probe index value", time_table[probe_index]);
             max_indicator = Math.max(...indicator_table);
             let current_max_indicator_index = indicator_table.indexOf(max_indicator);
             // check for multiple maxima

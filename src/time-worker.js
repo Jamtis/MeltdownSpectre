@@ -3,9 +3,11 @@ addEventListener("message", event => {
     postMessage("start");
     while (true) {
         // const begin = performance.now();
-        // for (let i = 0; i < 1e7; ++i) {
+        // const limit = 1e8;
+        // for (let i = 0; i < limit; ++i) {
         Atomics.add(array, 0, 1);
+        // ++array[0];
         // }
-        // console.log("current rate", (performance.now() - begin) / 10, "ns");
+        // console.log("current rate", (performance.now() - begin) * 1e6 / limit, "ns");
     }
 });

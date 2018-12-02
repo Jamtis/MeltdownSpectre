@@ -1,5 +1,4 @@
 import plot from "./helper/plot.js";
-import requestAnimationFunction from "https://unpkg.com/requestanimationfunction@1.0.0/requestAnimationFunction.js";
 
 const worker = new Worker("worker.js", {
     type: "module"

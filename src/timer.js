@@ -7,6 +7,7 @@ export default
     const Timer = {
         restore() {
             // array[0] = 0;
+            // console.log("dl", array[0]);
             Atomics.store(array, 0, 0);
             // return Timer.load();
         },
