@@ -20,14 +20,17 @@ export default (async () => {
                 result,
                 second_ratio
             } = readMemory(lower_limit, probe_index, .5);
-            // console.log("sir mean", second_ratio_mean);
             // if (second_ratio < second_ratio_mean) {
             if (second_ratio < .96 && result !== undefined) {
                 successes += result == probe_index;
                 ++i;
                 // console.log("%csuccess rate", "green", successes / i);
             }
+            console.log("sir", second_ratio);
             // second_ratio_mean = (counter * second_ratio_mean + second_ratio) / (counter + 1);
+        }
+        if (i < 100) {
+            console.warn("high undetected error rate");
         }
         /*console.log("read", i, "bytes");
         console.log("read", successes, "bytes correctly");

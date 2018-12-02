@@ -19,17 +19,21 @@ export default (async () => {
         junk ^= probe_table[probe_index * page_size];
         // }
         eval(probeTable_string);
-        // probeTable(probe_index);
+        // probeTable();
         return time_table;
+        
     };
-    
     function probeTable() {
-        for (let i = 0; i < probe_length; ++i) {
-            const probe_index = i * page_size; // i % 2 ? "string" : i * page_size / 2;
+        for (let i = -1; i < probe_length; ++i) {
+            // eval("(()=>{})();");
+            const probe_index = i * page_size;
+            // const probe_index = i % 2 ? "string" : i * page_size / 2;
             timer.restore();
             // access the probe table
             junk ^= probe_table[probe_index];
             time_table[i] = timer.load();
         }
+        return junk;
     }
+    
 })();

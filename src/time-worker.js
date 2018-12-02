@@ -7,6 +7,5 @@ addEventListener("message", event => {
         Atomics.add(array, 0, 1);
         }
         console.log("current rate", (performance.now() - begin) / 10, "ns");
-        // ++array[0];
     }
 });

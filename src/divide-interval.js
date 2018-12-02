@@ -10,6 +10,7 @@ async function divideInterval(options) {
     pairs.push([interval_start, await getter(interval_start)]);
     if (interval_end != interval_start) {
         if (!isNaN(min_step_width)) {
+            min_step_width = Math.abs(min_step_width);
             if (Math.abs(interval_end - interval_start) < min_step_width * length) {
                 console.warn("interval too narrow for length and min_step_width; adjusting min_step_width adaptively");
             }
@@ -18,7 +19,6 @@ async function divideInterval(options) {
         }
         pairs.push([interval_end, await getter(interval_end)]);
         while (pairs.length < length) {
-            debugger;
             pairs.sort(([a], [b]) => a - b);
             let max_index;
             let max_value_difference = -Infinity;

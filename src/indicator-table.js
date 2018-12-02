@@ -1,4 +1,4 @@
-import {mean, zIndex} from "../math.js";
+import {mean, zIndex} from "./math.js";
 import wasm_configuration_promise from "./wasm-configuration.js";
 
 export default (async () => {
@@ -8,12 +8,10 @@ export default (async () => {
         indicator_table,
         reset: indicator_table.fill.bind(indicator_table, 0),
         processTimetable(time_table, cache_hit_weight) {
-            let zero_counter = 0;
             let min_index = 0;
-            let min_value = 0xffffffff;
+            let min_value = Infinity;
             for (let i = 0; i < time_table.length; ++i) {
                 const value = time_table[i];
-                zero_counter += value == 0;
                 if (value < min_value) {
                     min_value = value;
                     min_index = i;
@@ -21,9 +19,10 @@ export default (async () => {
             }
 
             const time_mean = mean(time_table);
+            console.log("mean", time_mean);
             const unique_threshold = time_mean * (1 - cache_hit_weight) + min_value * cache_hit_weight;
 
-            if (zero_counter > 1 || time_mean < 5) {
+            if (time_mean < 5) {
                 throw Error("timer fault");
             }
             
