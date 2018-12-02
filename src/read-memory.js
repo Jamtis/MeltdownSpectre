@@ -53,7 +53,7 @@ export default (async () => {
                 }
             }
             const second_ratio = second_indicator / max_indicator;*/
-            storage[probe_index] = {
+            storage[c++] = {
                 max_indicator_index,
                 max_indicator: max_indicator / (j+1),
                 // second_ratio,

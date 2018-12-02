@@ -8,6 +8,7 @@ export default (async () => {
     const timer = await timer_promise;
     const {
         page_size,
+        probe_size,
         probe_length,
         probe_table
     } = await wasm_configuration_promise;
@@ -24,16 +25,13 @@ export default (async () => {
         
     };
     function probeTable() {
-        for (let i = -1; i < probe_length; ++i) {
-            // eval("(()=>{})();");
-            const probe_index = i * page_size;
+        for (let i = 0; i < probe_size; i += page_size) {
             // const probe_index = i % 2 ? "string" : i * page_size / 2;
             timer.restore();
             // access the probe table
-            junk ^= probe_table[probe_index];
+            junk ^= probe_table[i];
             time_table[i] = timer.load();
         }
         return junk;
     }
-    
 })();
