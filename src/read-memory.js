@@ -45,22 +45,6 @@ export default (async () => {
             } else {
                 ++i;
             }
-            
-            /*let second_indicator = -Infinity;
-            for (let i = 0; i < indicator_table.length; ++i) {
-                const indicator = indicator_table[i];
-                if (indicator > second_indicator && i != max_indicator_index) {
-                    second_indicator = indicator;
-                }
-            }
-            const second_ratio = second_indicator / max_indicator;*/
-            storage[c++] = {
-                max_indicator_index,
-                max_indicator: max_indicator / (j+1),
-                // second_ratio,
-                time_table: [...time_table]
-            };
-            
             // analyse using secret information
             // analyseTimetable(time_table, cache_hit_weight, probe_index);
         }
