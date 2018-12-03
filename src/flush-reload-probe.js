@@ -15,7 +15,9 @@ export default (async () => {
         // probe_index = _probe_index;
         evictCache();
         // for (let i = 0; i < 1e2; ++i) {
+        console.timeStamp("reload");
         junk ^= probe_table[probe_index * page_size];
+        console.timeStamp("probe");
         // probe the probe_table
         for (let i = -2; i < probe_length; ++i) {
             timer.restore();

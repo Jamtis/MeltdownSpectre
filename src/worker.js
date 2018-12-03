@@ -1,6 +1,6 @@
 import divideInterval from "./divide-interval.js";
 import plot from "./helper/plot.js";
-import readMemorySafely_promise from "./read-memory-safely.js";
+// import readMemorySafely_promise from "./read-memory-safely.js";
 import readMemory_promise from "./read-memory.js";
 import timer_promise from "./timer.js";
 
@@ -12,32 +12,28 @@ self.storage = storage;
 self.c = 0;
 
 (async () => {
-    const readMemorySafely = await readMemorySafely_promise;
+    // const readMemorySafely = await readMemorySafely_promise;
     const readMemory = await readMemory_promise;
     const timer = await timer_promise;
     
-    const {
-        page_size,
-        probe_length,
-        probe_table
-    } = await wasm_configuration_promise;
-    
-    console.log("start tests");
+    console.profile("tests");
     try {
-        // probe_table[64 * page_size];
         await new Promise(resolve => setTimeout(resolve, 1e3));
-        readMemory(10, 82, .5);
+        for (let i = 0; i < 100; ++i) {
+            // new Promise(resolve => setTimeout(resolve, 1));
+            readMemory(1, 82, .5);
+        }
         // await readMemorySafely(1);
         // const array = new Uint8Array(probe_table.buffer, 0, probe_table.length);
         // readMemory(1, 82, .5);
-        postMessage(storage);
+        // postMessage(storage);
         console.log("storage", storage);
         // await sweepLowerLimit([1<<8, 1 << 8]);
     } catch (error) {
         console.error(error);
     }
     timer.terminate();
-    console.log("end tests");
+    console.profileEnd("tests");
 
     function sweepLowerLimit(interval) {
         let c = 0;
