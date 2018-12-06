@@ -1,0 +1,26 @@
+{
+    "name": "spectre",
+    "version": "1.0.0",
+    "description": "",
+    "main": "gulpconf.js",
+    "dependencies": {
+        "gulp": "^4.0.0"
+    },
+    "devDependencies": {
+        "gulp-rename": "^1.4.0",
+        "gulp-string-replace": "^1.1.2"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Jamtis/MeltdownSpectre.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Jamtis/MeltdownSpectre/issues"
+    },
+    "homepage": "https://github.com/Jamtis/MeltdownSpectre#readme"
+}

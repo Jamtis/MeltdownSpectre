@@ -3,10 +3,10 @@ import wasm_configuration_promise from "./wasm-configuration.js";
 
 export default (async () => {
     const {probe_length} = await wasm_configuration_promise;
-    const indicator_table = new Uint32Array(probe_length);
-    return {
-        indicator_table,
-        reset: indicator_table.fill.bind(indicator_table, 0),
+    class IndicatorTable extends Uint32Array {
+        reset() {
+            this.fill(0);
+        }
         processTimetable(time_table, cache_hit_weight) {
             let min_index = 0;
             let min_value = Infinity;
@@ -18,22 +18,33 @@ export default (async () => {
                 }
             }
 
-            const time_mean = mean(time_table);
-            console.log("mean", time_mean);
-            const unique_threshold = time_mean * (1 - cache_hit_weight) + min_value * cache_hit_weight;
+            const mean_time = mean(time_table);
+            // console.log(`%cmean ${mean_time}`, "font-size: 1em");
 
-            if (time_mean < 5) {
+            if (mean_time < 5) {
                 throw Error("timer fault");
             }
             
-            // count potential cahce hits
+            // count potential cache hits
+            const unique_threshold = mean_time * (1 - cache_hit_weight) + min_value * cache_hit_weight;
             for (let i = 0; i < time_table.length; ++i) {
                 const value = time_table[i];
                 if (value <= unique_threshold) {
-                    ++indicator_table[i];
+                    ++this[i];
                 }
             }
-        },
+        }
+        getNormalized() {
+            const normalized_indicator_table = new Float32Array(this);
+            let sum = 0;
+            for (let i = 0; i < this.length; ++i) {
+                sum += this[i];
+            }
+            for (let i = 0; i < this.length; ++i) {
+                normalized_indicator_table[i] /= sum;
+            }
+            return normalized_indicator_table;
+        }
         analyseTimetable(time_table, cache_hit_weight, test_probe_index) {
             let zero_counter = 0;
             let min_index = 0;
@@ -86,5 +97,6 @@ export default (async () => {
                 console.groupEnd();
             }
         }
-    };
+    }
+    return new IndicatorTable(probe_length);
 })();

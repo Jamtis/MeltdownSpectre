@@ -860,7 +860,7 @@ Options:
         type: bool  default: false
   --print-opt-code (print optimized code)
         type: bool  default: false
-  --print-opt-code-filter (filter for printing optimized code)
+  --print-opt-code-filter (filter for printing optimized code
         type: string  default: *
   --print-code-verbose (print more information for code)
         type: bool  default: false

@@ -10,6 +10,6 @@ module.exports = {
         "gulp-rename": [{
             "extname": ".mjs"
         }],
-        "gulp-string-replace": [".js", ".mjs"]
+        "gulp-string-replace": [/\.js/g, ".mjs"]
     }
 }

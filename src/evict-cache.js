@@ -1,15 +1,16 @@
-const offset = 64;
 // prevent optimization
 let junk = 0;
-const size = 20 * 4 * (1 << 20);
-const array = new Uint32Array(new ArrayBuffer(size));
-function evictCache(_size = size) {
-    console.timeStamp("evict");
-    for (let i = 0; i < _size / 4; ++i) {
+let array;
+
+export default
+function evictCache(cache_size) {
+    if (!array || cache_size > array.byteLength) {
+        array = new Uint32Array(new ArrayBuffer(1 << (Math.ceil(Math.log2(cache_size)) | 2)));
+    }
+    // console.timeStamp("evict");
+    for (let i = 0; i < cache_size; i += 1) {
         // read array value into cache
         junk ^= array[i];
     }
     return junk;
-}
-
-export default evictCache;
+};
