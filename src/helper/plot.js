@@ -16,6 +16,11 @@ export default (storage, trace_names) => {
         }
     }
     for (const trace_name of trace_names) {
+        if (!document.querySelector("#" + trace_name + "-plot")) {
+           const plot_container = document.createElement("div");
+            plot_container.id = trace_name + "-plot";
+            document.body.appendChild(plot_container);
+        }
         Plotly.newPlot(trace_name + "-plot", [{
             x,
             y: traces[trace_name],

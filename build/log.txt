@@ -1,0 +1,398 @@
+Concurrent recompilation has been disabled for tracing.
+---------------------------------------------------
+Begin compiling StoreFastElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method StoreFastElementStub using Turbofan
+---------------------------------------------------
+Begin compiling StoreFastElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method StoreFastElementStub using Turbofan
+---------------------------------------------------
+Begin compiling StoreFastElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method StoreFastElementStub using Turbofan
+---------------------------------------------------
+Begin compiling StoreFastElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method StoreFastElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method js-to-wasm using Turbofan
+---------------------------------------------------
+Finished compiling method js-to-wasm using Turbofan
+---------------------------------------------------
+Finished compiling method wasm-to-js using Turbofan
+---------------------------------------------------
+Finished compiling method wasm-to-js using Turbofan
+%ccurrent cache size 33554432 color:blue
+---------------------------------------------------
+Begin compiling StoreSlowElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method StoreSlowElementStub using Turbofan
+[marking 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 14/19 (73%), generic ICs: 0/19 (0%)]
+[compiling method 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> using TurboFan OSR]
+---------------------------------------------------
+Begin compiling method evictCache using Turbofan
+---------------------------------------------------
+Finished compiling method evictCache using Turbofan
+[optimizing 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> - took 28.453, 75.295, 5.750 ms]
+---------------------------------------------------
+Begin compiling StoreFastElementStub using Turbofan
+---------------------------------------------------
+Finished compiling method StoreFastElementStub using Turbofan
+[compiling method 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> using TurboFan]
+---------------------------------------------------
+Begin compiling method evictCache using Turbofan
+---------------------------------------------------
+Finished compiling method evictCache using Turbofan
+[optimizing 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> - took 12.830, 51.447, 8.750 ms]
+[deoptimizing (DEOPT soft): begin 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> (opt #1) @13, FP to SP delta: 72, caller sp: 0x7fff919d9880]
+            ;;; deoptimize at <file:///home/codio/workspace/build/evict-cache.mjs:9:38>, Insufficient type feedback for generic named access
+  reading input frame evictCache => bytecode_offset=13, args=2, height=9; inputs:
+      0: 0x21b16dd11b79 ;  [fp -  16]  0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)>
+      1: 0x022e2cb025b1 ;  [fp +  24]  0x022e2cb025b1 <undefined>
+      2: 0x200000000000000 ;  [fp +  16]  33554432
+      3: 0x0949cb9583f9 ;  [fp -  24]  0x0949cb9583f9 <ModuleContext[7]>
+      4: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+      5: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+      6: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+      7: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+      8: 0x21b16dd7e889 ; rbx 0x21b16dd7e889 <Uint32Array map = 0x38171cd84c81>
+      9: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+     10: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+     11: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+     12: 0x022e2cb02f39 ; (literal  2) 0x022e2cb02f39 <Odd Oddball: optimized_out>
+  translating interpreted frame evictCache => bytecode_offset=13, height=72
+    0x7fff919d9878: [top + 128] <- 0x022e2cb025b1 <undefined> ;  stack parameter (input #1)
+    0x7fff919d9870: [top + 120] <- 0x200000000000000 <Smi 33554432> ;  stack parameter (input #2)
+    -------------------------
+    0x7fff919d9868: [top + 112] <- 0x2ad020e8e458 ;  caller's pc
+    0x7fff919d9860: [top + 104] <- 0x7fff919d9900 ;  caller's fp
+    0x7fff919d9858: [top +  96] <- 0x0949cb9583f9 <ModuleContext[7]> ;  context
+ (input #0)
+    0x7fff919d9850: [top +  88] <- 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> ;  function
+ (input #0)
+    0x7fff919d9848: [top +  80] <- 0x2ba93f545891 <BytecodeArray[179]> ;  bytecode array
+    0x7fff919d9840: [top +  72] <- 0x004600000000 <Smi 70> ;  bytecode offset
+    -------------------------
+    0x7fff919d9838: [top +  64] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #4)
+    0x7fff919d9830: [top +  56] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #5)
+    0x7fff919d9828: [top +  48] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #6)
+    0x7fff919d9820: [top +  40] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #7)
+    0x7fff919d9818: [top +  32] <- 0x21b16dd7e889 <Uint32Array map = 0x38171cd84c81> ;  stack parameter (input #8)
+    0x7fff919d9810: [top +  24] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #9)
+    0x7fff919d9808: [top +  16] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #10)
+    0x7fff919d9800: [top +   8] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  stack parameter (input #11)
+    0x7fff919d97f8: [top +   0] <- 0x022e2cb02f39 <Odd Oddball: optimized_out> ;  accumulator (input #0)
+[deoptimizing (soft): end 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> @13 => node=13, pc=0x2ad020e8ea00, caller sp=0x7fff919d9880, took 0.257 ms]
+[marking 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 16/19 (84%), generic ICs: 0/19 (0%)]
+[compiling method 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> using TurboFan OSR]
+---------------------------------------------------
+Begin compiling method evictCache using Turbofan
+---------------------------------------------------
+Finished compiling method evictCache using Turbofan
+[optimizing 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> - took 6.840, 29.916, 4.763 ms]
+[compiling method 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> using TurboFan]
+---------------------------------------------------
+Begin compiling method evictCache using Turbofan
+---------------------------------------------------
+Finished compiling method evictCache using Turbofan
+[optimizing 0x21b16dd11b79 <JSFunction evictCache (sfi = 0x949cb954359)> - took 25.763, 77.411, 10.737 ms]
+mean time 963.24462890625
+%cfailure 7 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 482.4846754807692
+%cfailure 8 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.75
+[marking 0x1853519a16c1 <JSFunction processTimetable (sfi = 0x949cb9569e1)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 19/19 (100%), generic ICs: 0/19 (0%)]
+[compiling method 0x1853519a16c1 <JSFunction processTimetable (sfi = 0x949cb9569e1)> using TurboFan]
+---------------------------------------------------
+Begin compiling method processTimetable using Turbofan
+---------------------------------------------------
+Finished compiling method processTimetable using Turbofan
+[optimizing 0x1853519a16c1 <JSFunction processTimetable (sfi = 0x949cb9569e1)> - took 30.749, 83.582, 10.750 ms]
+[marking 0x2e46f9e480e9 <JSFunction process.hrtime.bigint (sfi = 0x2e46f9e47e51)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 2/2 (100%), generic ICs: 0/2 (0%)]
+[compiling method 0x2e46f9e480e9 <JSFunction process.hrtime.bigint (sfi = 0x2e46f9e47e51)> using TurboFan]
+---------------------------------------------------
+Begin compiling method process.hrtime.bigint using Turbofan
+---------------------------------------------------
+Finished compiling method process.hrtime.bigint using Turbofan
+[optimizing 0x2e46f9e480e9 <JSFunction process.hrtime.bigint (sfi = 0x2e46f9e47e51)> - took 5.521, 10.987, 1.527 ms]
+mean time 469.09609375
+%cfailure 10 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.7
+[marking 0x05858356d3d1 <JSFunction load (sfi = 0x949cb953941)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 5/5 (100%), generic ICs: 0/5 (0%)]
+[compiling method 0x05858356d3d1 <JSFunction load (sfi = 0x949cb953941)> using TurboFan]
+---------------------------------------------------
+Begin compiling method load using Turbofan
+---------------------------------------------------
+Finished compiling method load using Turbofan
+[optimizing 0x05858356d3d1 <JSFunction load (sfi = 0x949cb953941)> - took 7.026, 18.470, 2.687 ms]
+[marking 0x05858356d399 <JSFunction restore (sfi = 0x949cb9538e9)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 2/2 (100%), generic ICs: 0/2 (0%)]
+[compiling method 0x05858356d399 <JSFunction restore (sfi = 0x949cb9538e9)> using TurboFan]
+---------------------------------------------------
+Begin compiling method restore using Turbofan
+---------------------------------------------------
+Finished compiling method restore using Turbofan
+[optimizing 0x05858356d399 <JSFunction restore (sfi = 0x949cb9538e9)> - took 4.486, 13.241, 2.044 ms]
+mean time 6232.8111328125
+%cfailure 14 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9285714285714286
+mean time 317.1376953125
+%cfailure 6 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+[marking 0x2ba93f557d21 <JSFunction reloadIndex (sfi = 0x949cb955f89)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 2/2 (100%), generic ICs: 0/2 (0%)]
+[compiling method 0x2ba93f557d21 <JSFunction reloadIndex (sfi = 0x949cb955f89)> using TurboFan]
+---------------------------------------------------
+Begin compiling method reloadIndex using Turbofan
+---------------------------------------------------
+Finished compiling method reloadIndex using Turbofan
+[optimizing 0x2ba93f557d21 <JSFunction reloadIndex (sfi = 0x949cb955f89)> - took 3.438, 10.024, 1.450 ms]
+mean time 2125.973603219697
+%cfailure 16 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 2430.47900390625
+%cfailure 7 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 197.52001953125
+%cfailure 8 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 756.4453125
+%cfailure 7 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 212.4267578125
+%cfailure 7 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 198.12646484375
+%cfailure 7 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 222.2140625
+%cfailure 32 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.96875
+mean time 237.35601380813952
+%cfailure 25 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.92
+mean time 193.50634765625
+%cfailure 8 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 212.12583705357142
+%cfailure 7 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 290.72579520089283
+%cfailure 20 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.95
+mean time 222.91980698529412
+%cfailure 16 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.875
+mean time 204.83349609375
+%cfailure 12 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9166666666666666
+mean time 223.89892578125
+%cfailure 6 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+[marking 0x275eed74d299 <JSFunction deopt (sfi = 0x949cb957559)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 14/14 (100%), generic ICs: 1/14 (7%)]
+[compiling method 0x275eed74d299 <JSFunction deopt (sfi = 0x949cb957559)> using TurboFan]
+---------------------------------------------------
+Begin compiling method deopt using Turbofan
+---------------------------------------------------
+Finished compiling method deopt using Turbofan
+[optimizing 0x275eed74d299 <JSFunction deopt (sfi = 0x949cb957559)> - took 48.039, 194.073, 45.877 ms]
+mean time 385.7583705357143
+%cfailure 13 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9230769230769231
+mean time 237.32729640151516
+%csuccess for 60 color:green;font-weight:bold;padding-left:20px
+sir 0.875
+mean time 210.9894965277778
+%cfailure 15 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9333333333333333
+mean time 234.09489329268294
+%cfailure 16 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9375
+mean time 212.8955078125
+%cfailure 4 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 210.43607954545453
+%cfailure 8 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.875
+mean time 227.00060096153845
+[marking 0x05858356ef99 <JSFunction getNormalized (sfi = 0x949cb956a39)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 12/12 (100%), generic ICs: 0/12 (0%)]
+%cfailure 10 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9
+mean time 321.614697265625
+[compiling method 0x05858356ef99 <JSFunction getNormalized (sfi = 0x949cb956a39)> using TurboFan]
+---------------------------------------------------
+Begin compiling method getNormalized using Turbofan
+---------------------------------------------------
+Finished compiling method getNormalized using Turbofan
+[optimizing 0x05858356ef99 <JSFunction getNormalized (sfi = 0x949cb956a39)> - took 9.112, 36.101, 4.843 ms]
+%cfailure 31 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.967741935483871
+mean time 256.06178042763156
+%cfailure 14 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 216.0400390625
+%cfailure 5 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 461.2255859375
+%cfailure 6 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 194.45572916666666
+%csuccess for 60 color:green;font-weight:bold;padding-left:20px
+sir 0.9354838709677419
+mean time 225.14501953125
+%cfailure 6 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 229.0675
+%cfailure 14 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.9285714285714286
+mean time 216.2117800245098
+%cfailure 19 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.8947368421052632
+mean time 206.65749289772728
+%cfailure 10 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 215.14483173076923
+%csuccess for 60 color:green;font-weight:bold;padding-left:20px
+sir 0.7692307692307693
+mean time 213.52439024390245
+%cfailure 15 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 208.3584449404762
+%cfailure 8 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 200.9072265625
+%cfailure 4 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 202.63290550595238
+%cfailure 19 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.8947368421052632
+mean time 210.6006324404762
+%cfailure 10 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 789.36279296875
+%cfailure 5 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 198.8037109375
+%cfailure 6 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 166.1337890625
+%cfailure 8 for 60 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 221.4270567602041
+%cfailure 25 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.88
+mean time 210.9186580882353
+%cfailure 9 for 60 color:red;font-weight:bold;padding-left:20px
+sir 0.8888888888888888
+%ccurrent cache size 134217728 color:blue
+mean time 219.7513912671233
+%cfailure 31 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 212.91152871621622
+%cfailure 17 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9411764705882353
+mean time 210.16259765625
+%cfailure 5 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 323.39599609375
+%cfailure 5 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 253.00145656779662
+%cfailure 26 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 217.41755756578948
+%cfailure 11 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9090909090909091
+mean time 219.5986328125
+%cfailure 6 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 325.94117647058823
+%cfailure 17 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9411764705882353
+mean time 221.8893612132353
+%cfailure 26 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9230769230769231
+mean time 203.04248046875
+%cfailure 6 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 305.815234375
+%cfailure 10 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 209.21144153225808
+%cfailure 16 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.875
+mean time 204.383251953125
+%cfailure 31 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 207.07291666666666
+%cfailure 12 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.8333333333333334
+mean time 196.72057291666667
+%cfailure 17 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 189.66072789634146
+%cfailure 19 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 215.08740234375
+%cfailure 9 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.8888888888888888
+mean time 200.37708333333333
+%cfailure 8 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.875
+mean time 403.5281575520833
+%cfailure 11 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9090909090909091
+mean time 191.74459134615384
+%cfailure 14 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9285714285714286
+mean time 204.42578125
+%cfailure 12 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9166666666666666
+mean time 213.21005859375
+%csuccess for 228 color:green;font-weight:bold;padding-left:20px
+sir 0.8235294117647058
+mean time 300.5978515625
+%cfailure 10 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9
+mean time 184.6925048828125
+%csuccess for 228 color:green;font-weight:bold;padding-left:20px
+sir 0.8888888888888888
+mean time 205.50970262096774
+%cfailure 22 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9090909090909091
+[marking 0x275eed74d101 <JSFunction mean (sfi = 0x949cb9556c1)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 10/13 (76%), generic ICs: 1/13 (7%)]
+mean time 197.66269985465115
+%cfailure 18 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9444444444444444
+[compiling method 0x275eed74d101 <JSFunction mean (sfi = 0x949cb9556c1)> using TurboFan]
+---------------------------------------------------
+Begin compiling method mean using Turbofan
+---------------------------------------------------
+Finished compiling method mean using Turbofan
+[optimizing 0x275eed74d101 <JSFunction mean (sfi = 0x949cb9556c1)> - took 12.997, 64.977, 8.536 ms]
+mean time 227.21142578125
+%cfailure 6 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+[marking 0x275eed753bd9 <JSFunction flushReloadProbe (sfi = 0x949cb955f31)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 5/5 (100%), generic ICs: 2/5 (40%)]
+[compiling method 0x275eed753bd9 <JSFunction flushReloadProbe (sfi = 0x949cb955f31)> using TurboFan]
+---------------------------------------------------
+Begin compiling method flushReloadProbe using Turbofan
+---------------------------------------------------
+Finished compiling method flushReloadProbe using Turbofan
+[optimizing 0x275eed753bd9 <JSFunction flushReloadProbe (sfi = 0x949cb955f31)> - took 29.863, 138.101, 18.318 ms]
+mean time 202.07834201388889
+%cfailure 8 for 228 color:red;font-weight:bold;padding-left:20px
+sir 1
+mean time 216.83289930555554
+%cfailure 20 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.95
+mean time 179.5905330882353
+%cfailure 11 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.8181818181818182
+mean time 184.8984375
+%cfailure 14 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9285714285714286
+mean time 212.44656808035714
+%cfailure 13 for 228 color:red;font-weight:bold;padding-left:20px
+sir 0.9230769230769231
+test: 94208.391ms

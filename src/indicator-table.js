@@ -1,4 +1,4 @@
-import {mean, zIndex} from "./math.js";
+import {mean, zIndex} from "./helper/math.js";
 import wasm_configuration_promise from "./wasm-configuration.js";
 
 export default (async () => {
@@ -19,19 +19,20 @@ export default (async () => {
             }
 
             const mean_time = mean(time_table);
-            // console.log(`%cmean ${mean_time}`, "font-size: 1em");
+            // console.log(`%cmean ${mean_time | 0}`, "font-size: 1em");
 
-            if (mean_time < 5) {
-                throw Error("timer fault");
-            }
-            
-            // count potential cache hits
-            const unique_threshold = mean_time * (1 - cache_hit_weight) + min_value * cache_hit_weight;
-            for (let i = 0; i < time_table.length; ++i) {
-                const value = time_table[i];
-                if (value <= unique_threshold) {
-                    ++this[i];
+            if (mean_time >= 5) {
+                // count potential cache hits
+                const unique_threshold = mean_time * (1 - cache_hit_weight) + min_value * cache_hit_weight;
+                for (let i = 0; i < time_table.length; ++i) {
+                    const value = time_table[i];
+                    if (value <= unique_threshold) {
+                        ++this[i];
+                    }
                 }
+                return mean_time;
+            } else {
+                // console.warn("timer fault");
             }
         }
         getNormalized() {
