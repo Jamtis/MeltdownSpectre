@@ -4,8 +4,6 @@ import {mean, zIndex} from "./helper/math.mjs";
 import flushReloadProbe_promise from "./flush-reload-probe.mjs";
 import indicator_table_promise from "./indicator-table.mjs";
 
-import deopt from "./helper/deopt.mjs";
-
 let performance_promise = (async () => {
     if (typeof performance == "undefined") {
         const performance = await import("perf_hooks");
@@ -31,12 +29,12 @@ export default (async () => {
             // new microtask
             await Promise.resolve();
             // new task
-            await new Promise(resolve => setTimeout(resolve, 1e3));
-            const deopt_testIndex = await deopt(testIndex);
+            // await new Promise(resolve => setTimeout(resolve, 1e3));
+            // const deopt_testIndex = await deopt(testIndex);
             const {
                 max_indicator_index,
                 second_ratio
-            } = await deopt_testIndex(probe_index, min_iterations, cache_size, cache_hit_weight);
+            } = testIndex(probe_index, min_iterations, cache_size, cache_hit_weight);
             // if (second_ratio < second_ratio_mean) {
             if (second_ratio < .96 && max_indicator_index !== undefined) {
                 successes += max_indicator_index == probe_index;
@@ -58,4 +56,10 @@ export default (async () => {
             success_rate: successes / (performance.now() - begin) * 1e3
         };
     };
+    
+    function deopt(_function) {
+        const function_name = _function.name;
+        const new_function_string = _function.toString().replace(`function ${function_name}`, `function deopt_${function_name}_${Math.random().toString().substr(2)}`);
+        return eval(`(${new_function_string})`);
+    }
 })();

@@ -1,10 +1,8 @@
 import wasm_configuration_promise from "./wasm-configuration.js";
 import evictCache from "./evict-cache.js";
 import timer_promise from "./timer.js";
-import deopt from "./helper/deopt.js";
 
 export default (async () => {
-    let deopt_counter = 0;
     const timer = await timer_promise;
     const {
         page_size,
@@ -14,39 +12,29 @@ export default (async () => {
     const time_table = new Uint32Array(probe_length);
     return flushReloadProbe;
     
-    async function flushReloadProbe(probe_index, cache_size) {
+    function flushReloadProbe(probe_table, probe_index) {
         // probe_index = _probe_index;
-        evictCache(cache_size);
+        // evictCache(cache_size);
         
-        // opt variant
-        // reloadIndex(probe_index);
-        // inline variant
-        // probe_table[probe_index * page_size];
-        // deopt variant
-        const deopt_reloadIndex = await deopt(reloadIndex);
-        deopt_reloadIndex(probe_index);
+        // probeTable[0] is always fast for sme reason so average that access out by randomizing the acutal probing index
+        const random_offset = Math.random() * 256 | 0;
+        // console.log("random offset", random_offset);
         
-        // opt variant
-        // probeTable();
-        // deopt variant
-        const deopt_probeTable = await deopt(probeTable);
-        await deopt_probeTable(time_table, reloadIndex);
+        let junk = probe_table[((probe_index + 256 - random_offset) % 256) * page_size];
+        
+        // const deopt_reloadIndex = await deopt(reloadIndex);
+        for (let i = 0; i < probe_length; ++i) {
+            timer.restore();
+            junk ^= probe_table[i * page_size];
+            time_table[(i + random_offset) % 256] = timer.load();
+        }
         
         return time_table;
     }
-    function reloadIndex(probe_index) {
-        return probe_table[probe_index * page_size];
-    }
-    async function probeTable(time_table, reloadIndex) {
-        let junk = 0;
-            const deopt_reloadIndex = await deopt(reloadIndex);
-        for (let i = -2; i < probe_length; ++i) {
-            timer.restore();
-            // deopt variant
-            junk ^= deopt_reloadIndex(i);
-            // inline variant
-            // junk ^= reloadIndex(i);
-            time_table[i] = timer.load();
-        }
+    
+    function deopt(_function) {
+        const function_name = _function.name;
+        const new_function_string = _function.toString().replace(`function ${function_name}`, `function deopt_${function_name}_${Math.random().toString().substr(2)}`);
+        return eval(`(${new_function_string})`);
     }
 })();

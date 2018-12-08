@@ -1,4 +1,4 @@
-import divideInterval from "./divide-interval.mjs";
+import divideInterval from "./helper/divide-interval.mjs";
 import plot from "./helper/plot.mjs";
 import testIndexRepeatedly_promise from "./test-index-repeatedly.mjs";
 import testIndex_promise from "./test-index.mjs";
@@ -9,8 +9,8 @@ import wasm_configuration_promise from "./wasm-configuration.mjs";
 
 const storage = {};
 // self.storage = storage;
-const repetitions = 20;
-const min_iterations = 8;
+const repetitions = 1;
+const min_iterations = 10;
 const cache_hit_weight = .5;
 
 (async () => {
@@ -21,7 +21,7 @@ const cache_hit_weight = .5;
 
         console.time("test");
         try {
-            await measureSuccessRatio(32 << 20);
+            // await measureSuccessRatio(32 << 20);
             await measureSuccessRatio(128 << 20);
             /*
             const options = {
@@ -48,11 +48,9 @@ const cache_hit_weight = .5;
             console.log(`%ccurrent cache size ${cache_size}`, "color:blue");
             
             const probe_index = Math.random() * 256 | 0;
-            const {success_ratio} = await testIndexRepeatedly(probe_index, repetitions, min_iterations, cache_size, cache_hit_weight);
-            storage[cache_size] = {
-                success_ratio
-            };
-            return success_ratio;
+            const result = await testIndexRepeatedly(probe_index, repetitions, min_iterations, cache_size, cache_hit_weight);
+            storage[cache_size] = result;
+            return result.success_ratio;
         }
     } catch (error) {
         console.error(error);

@@ -1,10 +1,17 @@
 import {mean, zIndex} from "./helper/math.mjs";
 import flushReloadProbe_promise from "./flush-reload-probe.mjs";
 import indicator_table_promise from "./indicator-table.mjs";
+import wasm_configuration_promise from "./wasm-configuration.mjs";
 
 export default (async () => {
     const indicator_table = await indicator_table_promise;
     const flushReloadProbe = await flushReloadProbe_promise;
+    const {
+        page_size,
+        probe_length,
+        probe_table
+    } = await wasm_configuration_promise;
+    
     return async function testIndex(probe_index, min_iterations, cache_size, cache_hit_weight) {
         indicator_table.reset();
         let max_indicator;
@@ -12,7 +19,11 @@ export default (async () => {
         const mean_times = [];
         for (let i = 0, j = 0; i < min_iterations && j < min_iterations * 10; ++j) {
             // await new Promise(resolve => setTimeout(resolve, 0));
-            const time_table = await flushReloadProbe(probe_index, cache_size);
+            const probe_table = new Uint8Array(probe_length * page_size);
+            // probe_table.fill(0);
+            const time_table = flushReloadProbe(probe_table, probe_index, cache_size);
+            // for (let i = 0; i < 1e8; ++i);
+            console.log("tt", [...time_table]);
             try {
                 const mean_time = indicator_table.processTimetable(time_table, cache_hit_weight);
                 if (mean_time >= 5) {
@@ -56,6 +67,7 @@ export default (async () => {
         const mean_time = mean(mean_times);
         console.log("mean time", mean_time);
         try {
+            console.log("nit", indicator_table.getNormalized());
             return {
                 max_indicator_index,
                 second_ratio,
@@ -66,7 +78,7 @@ export default (async () => {
             if (max_indicator_index == probe_index) {
                 console.log(`%csuccess for ${probe_index}`, "color:green;font-weight:bold;padding-left:20px");
             } else {
-                console.log(`%cfailure ${max_indicator} for ${probe_index}`, "color:red;font-weight:bold;padding-left:20px");
+                console.log(`%cfailure ${max_indicator_index} for ${probe_index}`, "color:red;font-weight:bold;padding-left:20px");
             }
         }
     };
