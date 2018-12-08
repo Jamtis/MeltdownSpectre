@@ -30,7 +30,7 @@ export default (async () => {
                 }
                 let selector_threshold = 0;
                 let last_sum;
-                for (let sum_counts = 0; sum_counts < max_cache_hit_number; ++selector_threshold) {
+                for (let sum_counts = 0; sum_counts < max_cache_hit_number && sum_counts < time_table.length; ++selector_threshold) {
                     last_sum = sum_counts;
                     sum_counts += time_counts[selector_threshold] | 0;
                 }
