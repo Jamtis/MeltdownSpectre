@@ -22,34 +22,28 @@ export default (async () => {
     return async function testIndexRepeatedly(probe_index, repetitions, min_iterations, max_cache_hit_number) {
         const begin = performance.now();
         let successes = 0;
-        let second_ratio_mean = 0;
-        // for (let j = 0; i < 100 && performance.now() - begin < 1e4; ++j) {
-        for (var i = 0; i < repetitions; ++i) {
+        let mean_second_ratio = 0;
+        for (let i = 0; i < repetitions; ++i) {
             // new microtask
             // await Promise.resolve();
             // new task
-            await new Promise(resolve => setTimeout(resolve, 1e3));
-            // const deopt_testIndex = await deopt(testIndex);
+            // await new Promise(resolve => setTimeout(resolve, 1e3));
             const {
                 max_indicator_index,
                 second_ratio
             } = testIndex(probe_index, min_iterations, max_cache_hit_number);
             console.assert(max_indicator_index === undefined ^ second_ratio < 1, "second_ratio is 1 iff index test failed");
-            successes += max_indicator_index == probe_index;
+            if (max_indicator_index == probe_index) {
+                ++successes;
+                mean_second_ratio += second_ratio;
+            }
             console.log("sir", second_ratio);
-            // second_ratio_mean = (counter * second_ratio_mean + second_ratio) / (counter + 1);
         }
-        if (i < repetitions) {
-            console.warn("high undetected error rate");
-        }
-        /*console.log("read", i, "bytes");
-        console.log("read", successes, "bytes correctly");
-        console.log("with", successes / (performance.now() - begin) * 1e3, "B/s");*/
+        mean_second_ratio /= successes;
         return {
-            successes,
-            counter: i,
-            success_ratio: successes / i,
-            success_rate: successes / (performance.now() - begin) * 1e3
+            success_ratio: successes / repetitions,
+            success_rate: successes / (performance.now() - begin) * 1e3,
+            mean_second_ratio
         };
     };
     

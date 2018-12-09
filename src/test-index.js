@@ -59,9 +59,8 @@ export default (async () => {
             // analyseTimetable(time_table, cache_hit_weight, probe_index);
         }
         const mean_time = mean(mean_times);
-        if (i >= min_iterations) {
+        if (i < min_iterations) {
             max_indicator_index = undefined;
-        } else {
             console.warn("index test failed");
         }
         // prepare results
