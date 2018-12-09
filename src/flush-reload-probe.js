@@ -1,6 +1,7 @@
 import wasm_configuration_promise from "./wasm-configuration.js";
 import evictCache from "./evict-cache.js";
 import timer_promise from "./timer.js";
+import big_probe_table from "./probe-table.js";
 
 export default (async () => {
     const timer = await timer_promise;
@@ -12,7 +13,9 @@ export default (async () => {
     const time_table = new Uint32Array(probe_length);
     return flushReloadProbe;
     
-    function flushReloadProbe(probe_table, probe_index, page_size) {
+    function flushReloadProbe(probe_index, page_size) {
+        // const probe_table = new Uint8Array(probe_length * page_size);
+        const probe_table = big_probe_table.getSubarray(probe_length * page_size);
         // probe_index = _probe_index;
         // evictCache(cache_size);
         

@@ -22,9 +22,7 @@ export default (async () => {
         while (i < min_iterations && j < min_iterations) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
-            const probe_table = new Uint8Array(probe_length * page_size);
-            // probe_table.fill(0);
-            const time_table = flushReloadProbe(probe_table, probe_index, page_size);
+            const time_table = flushReloadProbe(probe_index, page_size);
             // for (let i = 0; i < 1e8; ++i);
             // console.log("tt", [...time_table]);
             try {
