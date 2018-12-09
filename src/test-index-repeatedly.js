@@ -34,6 +34,7 @@ export default (async () => {
                 max_indicator_index,
                 second_ratio
             } = testIndex(probe_index, min_iterations, max_cache_hit_number);
+            console.assert(max_indicator_index === undefined ^ second_ratio < 1, "second_ratio is 1 iff index test failed");
             successes += max_indicator_index == probe_index;
             console.log("sir", second_ratio);
             // second_ratio_mean = (counter * second_ratio_mean + second_ratio) / (counter + 1);

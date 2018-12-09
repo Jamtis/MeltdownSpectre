@@ -18,7 +18,8 @@ export default (async () => {
         let max_indicator_index;
         const mean_times = [];
         console.log("probe_index", probe_index);
-        for (let i = 0, j = 0; i < min_iterations && j < min_iterations * 10; ++j) {
+        let i = 0;
+        for (let j = 0; i < min_iterations && j < min_iterations * 10; ++j) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
             const probe_table = new Uint32Array(probe_length * page_size);
@@ -57,6 +58,12 @@ export default (async () => {
             // analyse using secret information
             // analyseTimetable(time_table, cache_hit_weight, probe_index);
         }
+        const mean_time = mean(mean_times);
+        if (i >= min_iterations) {
+            max_indicator_index = undefined;
+        } else {
+            console.warn("index test failed");
+        }
         // prepare results
         let second_indicator = -Infinity;
         for (let i = 0; i < indicator_table.length; ++i) {
@@ -66,8 +73,6 @@ export default (async () => {
             }
         }
         const second_ratio = second_indicator / max_indicator;
-        const mean_time = mean(mean_times);
-        console.log("mean time", mean_time);
         console.log("second ratio", second_ratio);
         try {
             // console.log("nit", indicator_table.getNormalized());
