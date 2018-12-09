@@ -9,9 +9,10 @@ import timer_promise from "./timer.js";
 const display_data = {};
 // self.storage = storage;
 const repetitions = 500;
-const min_iterations = 10;
+const min_iterations = 3;
 const max_cache_hit_number = 3;
-const parameters = [repetitions, min_iterations, max_cache_hit_number];
+const page_size = 1 << 12;
+const parameters = [repetitions, min_iterations, max_cache_hit_number, page_size];
 
 (async () => {
     let method_name;
@@ -25,8 +26,9 @@ const parameters = [repetitions, min_iterations, max_cache_hit_number];
             // await measureSuccessRatio(32 << 20);
             // await measureSuccessRatio(128 << 20);
             
+            const method = sweepPageSize;
             // const method = sweepMinIterations;
-            const method = sweepMaxCacheHitNumber;
+            // const method = sweepMaxCacheHitNumber;
             method_name = method.name;
             console.log("task", method_name);
             await method();
@@ -69,7 +71,7 @@ const parameters = [repetitions, min_iterations, max_cache_hit_number];
             await new Promise(resolve => setTimeout(resolve, 1e0));
             console.log(`%ccurrent value ${value}`, "color:blue");
 
-            const _parameters = parameters;
+            const _parameters = [...parameters];
             _parameters[arg_number] = value;
             
             const probe_index = Math.random() * 256 | 0;
@@ -98,6 +100,16 @@ const parameters = [repetitions, min_iterations, max_cache_hit_number];
                 min_step_width: 1,
                 getter: measureSuccessRatio.bind(null, 2),
                 length: 80
+            };
+            const pairs = await divideInterval(options);
+        }
+        
+        async function sweepPageSize() {
+            const options = {
+                interval: [0, 1 << 13],
+                min_step_width: 1,
+                getter: measureSuccessRatio.bind(null, 3),
+                length: 20
             };
             const pairs = await divideInterval(options);
         }

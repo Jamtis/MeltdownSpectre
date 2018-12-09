@@ -19,7 +19,7 @@ export default (async () => {
     const indicator_table = await indicator_table_promise;
     const flushReloadProbe = await flushReloadProbe_promise;
     
-    return async function testIndexRepeatedly(probe_index, repetitions, min_iterations, max_cache_hit_number) {
+    return async function testIndexRepeatedly(probe_index, repetitions, min_iterations, max_cache_hit_number, page_size) {
         const begin = performance.now();
         let successes = 0;
         let mean_second_ratio = 0;
@@ -31,7 +31,7 @@ export default (async () => {
             const {
                 max_indicator_index,
                 second_ratio
-            } = testIndex(probe_index, min_iterations, max_cache_hit_number);
+            } = testIndex(probe_index, min_iterations, max_cache_hit_number, page_size);
             console.assert(max_indicator_index === undefined ^ second_ratio < 1, "second_ratio is 1 iff index test failed");
             if (max_indicator_index == probe_index) {
                 ++successes;

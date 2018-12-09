@@ -12,26 +12,29 @@ export default (async () => {
         probe_table
     } = await wasm_configuration_promise;
     
-    return function testIndex(probe_index, min_iterations, max_cache_hit_number) {
+    return function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size) {
         indicator_table.reset();
         let max_indicator;
         let max_indicator_index;
         const mean_times = [];
         console.log("probe_index", probe_index);
-        let i = 0;
-        for (let j = 0; i < min_iterations && j < min_iterations * 10; ++j) {
+        let i = 0, j = 0;
+        while (i < min_iterations && j < min_iterations) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
-            const probe_table = new Uint32Array(probe_length * page_size);
+            const probe_table = new Uint8Array(probe_length * page_size);
             // probe_table.fill(0);
-            const time_table = flushReloadProbe(probe_table, probe_index);
+            const time_table = flushReloadProbe(probe_table, probe_index, page_size);
             // for (let i = 0; i < 1e8; ++i);
             // console.log("tt", [...time_table]);
             try {
                 const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
                 if (mean_time >= 5) {
                     mean_times.push(mean_time);
+                    j = 0;
                 } else {
+                    // console.warn("slow timer");
+                    ++j;
                     continue;
                 }
             } catch (error) {
@@ -51,6 +54,7 @@ export default (async () => {
             if (max_indicator_index != current_max_indicator_index) {
                 i = (current_max_indicator_index !== undefined) | 0;
                 max_indicator_index = current_max_indicator_index;
+                ++j;
                 // console.warn("max_indicator_index changed");
             } else {
                 ++i;

@@ -12,7 +12,7 @@ export default (async () => {
     const time_table = new Uint32Array(probe_length);
     return flushReloadProbe;
     
-    function flushReloadProbe(probe_table, probe_index) {
+    function flushReloadProbe(probe_table, probe_index, page_size) {
         // probe_index = _probe_index;
         // evictCache(cache_size);
         
