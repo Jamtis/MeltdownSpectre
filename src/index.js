@@ -2,32 +2,44 @@ import divideInterval from "./helper/divide-interval.js";
 import plot from "./helper/plot.js";
 import download from "./helper/download.js";
 
-import testIndexRepeatedly_promise from "./test-index-repeatedly.js";
-import testIndex_promise from "./test-index.js";
+import testIndexRepeatedly_promise from "./analysis/test-index-repeatedly.js";
+import testIndex_promise from "./analysis/test-index.js";
 import timer_promise from "./timer.js";
+import statisticallyReadMemory_promise from "./analysis/statistically-read-memory.js";
+import {
+    probe_length,
+    page_size,
+    repetitions,
+    min_iterations,
+    max_cache_hit_number
+} from "./configuration.js";
 
 const display_data = {};
-// self.storage = storage;
-const repetitions = 500;
-const min_iterations = 3;
-const max_cache_hit_number = 3;
-const page_size = 1 << 12;
-const parameters = [repetitions, min_iterations, max_cache_hit_number, page_size];
+const parameters = [repetitions, min_iterations, max_cache_hit_number, page_size, probe_length];
 
 (async () => {
     let method_name;
     try {
         const testIndexRepeatedly = await testIndexRepeatedly_promise;
-        const testIndex = await testIndex_promise;
+        // const testIndex = await testIndex_promise;
         const timer = await timer_promise;
-
+        const statisticallyReadMemory = await statisticallyReadMemory_promise;
+        
+        try {
+           statisticallyReadMemory(5100, 10, repetitions, min_iterations, max_cache_hit_number, page_size, probe_length);
+        } catch (error) {
+            console.error(error);
+        }
+        timer.terminate();
+        return;
+        
         console.time("test");
         try {
             // await measureSuccessRatio(32 << 20);
             // await measureSuccessRatio(128 << 20);
             
-            const method = sweepPageSize;
-            // const method = sweepMinIterations;
+            // const method = sweepPageSize;
+            const method = sweepMinIterations;
             // const method = sweepMaxCacheHitNumber;
             method_name = method.name;
             console.log("task", method_name);

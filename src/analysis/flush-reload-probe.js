@@ -1,21 +1,16 @@
-import wasm_configuration_promise from "./wasm-configuration.js";
-import evictCache from "./evict-cache.js";
-import timer_promise from "./timer.js";
-import big_probe_table from "./probe-table.js";
+// import evictCache from "./evict-cache.js";
+import timer_promise from "../timer.js";
+import big_table from "../big-table.js";
 
 export default (async () => {
     const timer = await timer_promise;
-    const {
-        page_size,
-        probe_length,
-        probe_table
-    } = await wasm_configuration_promise;
-    const time_table = new Uint32Array(probe_length);
     return flushReloadProbe;
     
-    function flushReloadProbe(probe_index, page_size) {
+    function flushReloadProbe(probe_index, page_size, probe_length) {
+        const time_table = new Uint32Array(probe_length);
+        
         // const probe_table = new Uint8Array(probe_length * page_size);
-        const probe_table = big_probe_table.getSubarray(probe_length * page_size);
+        const probe_table = big_table.getSubarray(probe_length * page_size);
         // probe_index = _probe_index;
         // evictCache(cache_size);
         
@@ -33,11 +28,5 @@ export default (async () => {
         }
         
         return time_table;
-    }
-    
-    function deopt(_function) {
-        const function_name = _function.name;
-        const new_function_string = _function.toString().replace(`function ${function_name}`, `function deopt_${function_name}_${Math.random().toString().substr(2)}`);
-        return eval(`(${new_function_string})`);
     }
 })();

@@ -1,0 +1,2 @@
+- subarray is faster but crashes sometimes
+- fallback to new uint8array

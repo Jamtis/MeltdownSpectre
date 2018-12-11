@@ -1,12 +1,7 @@
 import {mean, zIndex} from "./helper/math.js";
-import wasm_configuration_promise from "./wasm-configuration.js";
 
 export default (async () => {
-    const {probe_length} = await wasm_configuration_promise;
     class IndicatorTable extends Uint32Array {
-        reset() {
-            this.fill(0);
-        }
         processTimetable(time_table, max_cache_hit_number) {
             let min_index = 0;
             let min_value = Infinity;
@@ -63,5 +58,5 @@ export default (async () => {
             return normalized_indicator_table;
         }
     }
-    return new IndicatorTable(probe_length);
+    return IndicatorTable;
 })();

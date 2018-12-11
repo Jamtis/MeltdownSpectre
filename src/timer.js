@@ -29,7 +29,7 @@ if (typeof performance != "undefined") {
 } else {
     let begin;
     _export = (async () => {
-        const {hrtime} = (await import("process")).default;
+        const {hrtime} = (await eval(`import("process")`)).default;
         const Timer = {
             restore() {
                 begin = hrtime.bigint();

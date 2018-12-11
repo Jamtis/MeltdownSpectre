@@ -1,19 +1,13 @@
-import {mean, zIndex} from "./helper/math.js";
+import {mean, zIndex} from "../helper/math.js";
 import flushReloadProbe_promise from "./flush-reload-probe.js";
-import indicator_table_promise from "./indicator-table.js";
-import wasm_configuration_promise from "./wasm-configuration.js";
+import indicator_table_promise from "../indicator-table.js";
 
 export default (async () => {
-    const indicator_table = await indicator_table_promise;
+    const IndicatorTable = await indicator_table_promise;
     const flushReloadProbe = await flushReloadProbe_promise;
-    const {
-        page_size,
-        probe_length,
-        probe_table
-    } = await wasm_configuration_promise;
     
-    return function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size) {
-        indicator_table.reset();
+    return function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length) {
+        const indicator_table = new IndicatorTable(probe_length);
         let max_indicator;
         let max_indicator_index;
         const mean_times = [];
@@ -22,21 +16,17 @@ export default (async () => {
         while (i < min_iterations && j < min_iterations) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
-            const time_table = flushReloadProbe(probe_index, page_size);
+            const time_table = flushReloadProbe(probe_index, page_size, probe_length);
             // for (let i = 0; i < 1e8; ++i);
             // console.log("tt", [...time_table]);
-            try {
-                const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
-                if (mean_time >= 5) {
-                    mean_times.push(mean_time);
-                    j = 0;
-                } else {
-                    // console.warn("slow timer");
-                    ++j;
-                    continue;
-                }
-            } catch (error) {
-                console.error(error);
+            const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
+            if (mean_time >= 5) {
+                mean_times.push(mean_time);
+                j = 0;
+            } else {
+                // console.warn("slow timer");
+                ++j;
+                continue;
             }
             // console.log(`%cprobe index time ${time_table[probe_index]}`, "font-size: .9em");
             max_indicator = Math.max(...indicator_table);
