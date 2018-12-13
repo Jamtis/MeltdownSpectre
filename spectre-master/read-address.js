@@ -1,7 +1,7 @@
-import {mean, zIndex} from "./helper/math.js";
-import timer_promise from "./timer.js";
-import code_buffer from "./wasm-buffer.js";
-import indicator_table_promise from "./indicator-table.js";
+import {mean, zIndex} from "../helper/math.js";
+import timer_promise from "../timer.js";
+import code_buffer from "../wasm-buffer.js";
+import indicator_table_promise from "../indicator-table.js";
 
 let junk = 0;
 
@@ -52,7 +52,12 @@ export default
     const secret_table = new Uint8Array(wasm_memory.buffer, secret_address, 1);
     const _speculativelyReadAddress = instance.exports.speculativelyReadAddress;
 
-    return function speculativelyReadAddress(address, speculative_repetitions, min_iterations, max_cache_hit_number, page_size, probe_length) {
+    return {
+        speculativelyReadAddress,
+        secret_table
+    };
+    
+    function readAddress(address, speculative_repetitions, min_iterations, max_cache_hit_number, page_size, probe_length) {
         _probeTable = probeTable;
         const time_tables = [];
         let max_indicator;

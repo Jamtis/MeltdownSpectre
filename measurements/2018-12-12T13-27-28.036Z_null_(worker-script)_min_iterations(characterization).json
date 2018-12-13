@@ -1,0 +1,1 @@
+{"method_name":"min_iterations","test_results":{},"options":{"interval":[1,500],"min_step_width":1,"sample_size":80,"integer":true,"configuration":{"probe_length":256,"page_size":5000,"repetitions":500,"min_iterations":3,"max_cache_hit_number":10,"speculative_repetitions":256}},"worker":true}

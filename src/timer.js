@@ -3,7 +3,7 @@ if (typeof performance != "undefined") {
     const sharedbuffer = new SharedArrayBuffer(Uint32Array.BYTES_PER_ELEMENT);
     const array = new Uint32Array(sharedbuffer);
     _export = (async () => {
-        const worker = new Worker("./time-worker.js");
+        const worker = new Worker("../time-worker.js");
         const Timer = {
             restore() {
                 Atomics.store(array, 0, 0);

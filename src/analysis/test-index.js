@@ -11,7 +11,7 @@ export default (async () => {
         let max_indicator;
         let max_indicator_index;
         const mean_times = [];
-        console.log("probe_index", probe_index);
+        // console.log("probe_index", probe_index);
         let i = 0, j = 0;
         while (i < min_iterations && j < min_iterations) {
             // await Promise.resolve();
@@ -53,7 +53,7 @@ export default (async () => {
         const mean_time = mean(mean_times);
         if (i < min_iterations) {
             max_indicator_index = undefined;
-            console.warn("index test failed");
+            // console.warn("index test failed");
         }
         // prepare results
         let second_indicator = -Infinity;
@@ -64,7 +64,7 @@ export default (async () => {
             }
         }
         const second_ratio = second_indicator / max_indicator;
-        console.log("second ratio", second_ratio);
+        // console.log("second ratio", second_ratio);
         try {
             // console.log("nit", indicator_table.getNormalized());
             return {
@@ -75,9 +75,9 @@ export default (async () => {
             };
         } finally {
             if (max_indicator_index == probe_index) {
-                console.log(`%csuccess for ${probe_index}`, "color:green;font-weight:bold;padding-left:20px");
+                // console.log(`%csuccess for ${probe_index}`, "color:green;font-weight:bold;padding-left:20px");
             } else {
-                console.log(`%cfailure ${max_indicator_index} for ${probe_index}`, "color:red;font-weight:bold;padding-left:20px");
+                // console.log(`%cfailure ${max_indicator_index} for ${probe_index}`, "color:red;font-weight:bold;padding-left:20px");
             }
         }
     };
