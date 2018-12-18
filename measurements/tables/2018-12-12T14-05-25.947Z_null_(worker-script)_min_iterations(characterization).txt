@@ -1,0 +1,3 @@
+index	success_ratio (division)	success_rate (division)	mean_second_ratio (division)	second_ratio_SNR (division)
+1	0	0		
+500	1	4.282875351199827	0.1202738891937241	11.751875450603935

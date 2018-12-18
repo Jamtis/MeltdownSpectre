@@ -12,8 +12,8 @@ export default (async () => {
         let max_indicator_index;
         const mean_times = [];
         // console.log("probe_index", probe_index);
-        let i = 0, j = 0;
-        while (i < min_iterations && j < min_iterations) {
+        let i = 0, total_iterations = 0;
+        for (let j = 0; i < min_iterations && j < min_iterations; ++total_iterations) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
             const time_table = flushReloadProbe(probe_index, page_size, probe_length);
@@ -64,21 +64,12 @@ export default (async () => {
             }
         }
         const second_ratio = second_indicator / max_indicator;
-        // console.log("second ratio", second_ratio);
-        try {
-            // console.log("nit", indicator_table.getNormalized());
-            return {
-                max_indicator_index,
-                second_ratio,
-                normalized_indicator_table: indicator_table.getNormalized(),
-                mean_time
-            };
-        } finally {
-            if (max_indicator_index == probe_index) {
-                // console.log(`%csuccess for ${probe_index}`, "color:green;font-weight:bold;padding-left:20px");
-            } else {
-                // console.log(`%cfailure ${max_indicator_index} for ${probe_index}`, "color:red;font-weight:bold;padding-left:20px");
-            }
-        }
+        return {
+            max_indicator_index,
+            second_ratio,
+            normalized_indicator_table: indicator_table.getNormalized(),
+            mean_time,
+            total_iterations
+        };
     };
 })();

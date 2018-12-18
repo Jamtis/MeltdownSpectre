@@ -15,7 +15,7 @@ async function divideInterval(options) {
             if (integer) {
                 min_step_width = Math.ceil(min_step_width);
             }
-            if (Math.abs(interval_end - interval_start) < min_step_width * sample_size) {
+            if (Math.abs(interval_end - interval_start) + 1 < min_step_width * sample_size) {
                 console.warn("interval too narrow for length and min_step_width; adjusting min_step_width adaptively");
             }
         } else {

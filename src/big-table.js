@@ -1,4 +1,5 @@
-class ProbeTable {
+/*
+class BigTable {
     constructor(size) {
         this.array = new Uint8Array(size);
         this.pointer = 0;
@@ -14,3 +15,11 @@ class ProbeTable {
     }
 };
 export default new ProbeTable(1 << 29);
+*/
+
+// seems to mitigate crashes on Chrome
+export default {
+    getSubarray(size) {
+        return new Uint8Array(size);
+    }
+};

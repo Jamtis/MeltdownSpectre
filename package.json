@@ -8,7 +8,8 @@
     },
     "devDependencies": {
         "gulp-rename": "^1.4.0",
-        "gulp-string-replace": "^1.1.2"
+        "gulp-string-replace": "^1.1.2",
+        "minimist": "^1.2.0"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
