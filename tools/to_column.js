@@ -15,6 +15,7 @@ try {
             let {test_results, display_data, division_results, sequential_results} = JSON.parse(input_content);
             division_results = division_results || test_results || display_data; // legacy support
             const property_names = new Set;
+            console.assert(division_results, file);
             // gather all property names
             for (const entry of Object.values(division_results)) {
                 for (const property_name of Object.keys(entry)) {
@@ -43,7 +44,7 @@ try {
             const text_content = header_string + "\n" + entry_string;
             // console.log(header_string);
             // console.log(entry_string);
-            fs.writeFile(argv.input + "tables/" + file.replace(/\.json$/, ".txt"), text_content, error => console.error(error));
+            fs.writeFile(argv.input + "tables/" + file.replace(/\.json$/, ".txt"), text_content, error => error && console.error(error));
         }
     }
 } catch (error) {

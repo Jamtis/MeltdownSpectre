@@ -20,7 +20,7 @@ export default (async () => {
             // for (let i = 0; i < 1e8; ++i);
             // console.log("tt", [...time_table]);
             const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
-            if (mean_time >= 5) {
+            if (mean_time) {
                 mean_times.push(mean_time);
                 j = 0;
             } else {
@@ -67,7 +67,7 @@ export default (async () => {
         return {
             max_indicator_index,
             second_ratio,
-            normalized_indicator_table: indicator_table.getNormalized(),
+            // normalized_indicator_table: indicator_table.getNormalized(),
             mean_time,
             total_iterations
         };

@@ -1,1 +1,449 @@
-{"method_name":"max_cache_hit_number","division_results":{"1":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null,"order_index":0},"2":{"success_ratio":0.62,"success_rate":0.282314027910825,"mean_second_ratio":0.8196655992462148,"second_ratio_SNR":63.43050275817737,"probe_index":181,"mean_time":10.203906942068159,"order_index":11},"3":{"success_ratio":0.05,"success_rate":0.03713896285732858,"mean_second_ratio":0.7251365914786968,"second_ratio_SNR":9.880004102596466,"probe_index":181,"mean_time":8.4143804643962,"order_index":14},"4":{"success_ratio":0.91,"success_rate":0.46892737757776504,"mean_second_ratio":0.8428307073193855,"second_ratio_SNR":115.63147813109079,"probe_index":181,"mean_time":10.150900111868566,"order_index":10},"8":{"success_ratio":0.95,"success_rate":0.7044551225010394,"mean_second_ratio":0.81499069944587,"second_ratio_SNR":96.34415246221377,"probe_index":181,"mean_time":9.992832748038142,"order_index":9},"16":{"success_ratio":0.97,"success_rate":0.7087068656892089,"mean_second_ratio":0.8389127142090297,"second_ratio_SNR":109.94555662207414,"probe_index":181,"mean_time":10.28614071143916,"order_index":8},"32":{"success_ratio":0.94,"success_rate":0.5042228665069634,"mean_second_ratio":0.8304227985266696,"second_ratio_SNR":132.7185243784765,"probe_index":181,"mean_time":9.256682952891962,"order_index":7},"64":{"success_ratio":0.98,"success_rate":0.6366654323153347,"mean_second_ratio":0.8873990636593714,"second_ratio_SNR":168.45561316794692,"probe_index":181,"mean_time":8.9330212183425,"order_index":6},"128":{"success_ratio":0.91,"success_rate":0.507905748321005,"mean_second_ratio":0.9210080594552559,"second_ratio_SNR":205.10316169914512,"probe_index":181,"mean_time":8.631062110699236,"order_index":2},"192":{"success_ratio":0.96,"success_rate":0.4380019627962942,"mean_second_ratio":0.9676532985074816,"second_ratio_SNR":523.0591518258459,"probe_index":181,"mean_time":8.74568355059109,"order_index":3},"224":{"success_ratio":0.94,"success_rate":0.6596222750232641,"mean_second_ratio":0.9809317596311232,"second_ratio_SNR":1143.3880610789704,"probe_index":181,"mean_time":9.150971407752788,"order_index":4},"228":{"success_ratio":0.91,"success_rate":0.6370416625247798,"mean_second_ratio":0.9823083038412159,"second_ratio_SNR":1410.6936193998843,"probe_index":181,"mean_time":9.455983858879023,"order_index":15},"230":{"success_ratio":0.95,"success_rate":0.731496225479454,"mean_second_ratio":0.9862912261431577,"second_ratio_SNR":1864.2466853798742,"probe_index":181,"mean_time":9.55539290976495,"order_index":16},"231":{"success_ratio":0.83,"success_rate":0.8178451848626948,"mean_second_ratio":0.9843873572023203,"second_ratio_SNR":1756.2342529897805,"probe_index":181,"mean_time":9.725565359767947,"order_index":17},"232":{"success_ratio":0.66,"success_rate":0.3947604521801488,"mean_second_ratio":0.9860983537444674,"second_ratio_SNR":1407.4949963983831,"probe_index":181,"mean_time":8.839958159679158,"order_index":12},"234":{"success_ratio":0.7,"success_rate":0.5790991533570494,"mean_second_ratio":0.9880603453178121,"second_ratio_SNR":1817.086027812816,"probe_index":181,"mean_time":9.536401533271686,"order_index":23},"235":{"success_ratio":0.6,"success_rate":0.6367459733776722,"mean_second_ratio":0.9875212624434142,"second_ratio_SNR":1660.4338507414782,"probe_index":181,"mean_time":9.567656170119468,"order_index":24},"236":{"success_ratio":0.48,"success_rate":0.301982705198844,"mean_second_ratio":0.9890110533859923,"second_ratio_SNR":1588.0414862596408,"probe_index":181,"mean_time":9.10221002223671,"order_index":13},"238":{"success_ratio":0.44,"success_rate":0.46849129830651276,"mean_second_ratio":0.9903155513591032,"second_ratio_SNR":1589.1669692573794,"probe_index":181,"mean_time":9.7134031416648,"order_index":20},"239":{"success_ratio":0.39,"success_rate":0.42093901780898596,"mean_second_ratio":0.9912476719205696,"second_ratio_SNR":1629.852709540345,"probe_index":181,"mean_time":9.64014602546513,"order_index":22},"240":{"success_ratio":0.24,"success_rate":0.21674812783802055,"mean_second_ratio":0.9917026010264113,"second_ratio_SNR":1321.614970044148,"probe_index":181,"mean_time":9.012723994456413,"order_index":5},"242":{"success_ratio":0.06,"success_rate":0.12111278426177895,"mean_second_ratio":0.9935609208555564,"second_ratio_SNR":630.2025137064079,"probe_index":181,"mean_time":9.210872149800538,"order_index":21},"244":{"success_ratio":0.01,"success_rate":0.028760177507812266,"mean_second_ratio":0.9980276134122288,"second_ratio_SNR":null,"probe_index":181,"mean_time":10.177331590466926,"order_index":19},"248":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null,"order_index":18},"256":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null,"order_index":1}},"sequential_results":{"1":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null},"2":{"success_ratio":0.68,"success_rate":0.2477585141484679,"mean_second_ratio":0.8709776592768352,"second_ratio_SNR":102.38595098295045,"probe_index":181,"mean_time":10.214810994306571},"3":{"success_ratio":0.88,"success_rate":0.40335906428030815,"mean_second_ratio":0.8416984731087176,"second_ratio_SNR":90.25163598922346,"probe_index":181,"mean_time":10.130783146601273},"4":{"success_ratio":0.9,"success_rate":0.43208655557882014,"mean_second_ratio":0.8611954978974293,"second_ratio_SNR":126.39197321128722,"probe_index":181,"mean_time":9.955154987996513},"8":{"success_ratio":0.98,"success_rate":0.5971833663713615,"mean_second_ratio":0.83218892509056,"second_ratio_SNR":111.26743875006613,"probe_index":181,"mean_time":9.847332921703313},"16":{"success_ratio":0.96,"success_rate":0.6751757566891291,"mean_second_ratio":0.8461323830742252,"second_ratio_SNR":119.57700045211185,"probe_index":181,"mean_time":10.319247377504903},"32":{"success_ratio":0.97,"success_rate":0.47910911389014565,"mean_second_ratio":0.8577009428458464,"second_ratio_SNR":150.5239903029102,"probe_index":181,"mean_time":9.385820457222168},"64":{"success_ratio":0.96,"success_rate":0.5149952121539411,"mean_second_ratio":0.8951176637640402,"second_ratio_SNR":165.71985439100666,"probe_index":181,"mean_time":9.142598025739046},"128":{"success_ratio":0.97,"success_rate":1.0536514998785993,"mean_second_ratio":0.9407372420760737,"second_ratio_SNR":244.5120641314524,"probe_index":181,"mean_time":9.44686031598464},"192":{"success_ratio":0.9,"success_rate":0.7496751407723552,"mean_second_ratio":0.9716473159048312,"second_ratio_SNR":663.0661477853535,"probe_index":181,"mean_time":9.273397337411431},"224":{"success_ratio":0.95,"success_rate":0.802897869700755,"mean_second_ratio":0.9835207143392327,"second_ratio_SNR":1192.0751949401467,"probe_index":181,"mean_time":9.292003702414348},"228":{"success_ratio":0.93,"success_rate":0.9443244576987121,"mean_second_ratio":0.9812771644676513,"second_ratio_SNR":1373.0415960358882,"probe_index":181,"mean_time":9.852074315946004},"230":{"success_ratio":0.87,"success_rate":1.1587470082353883,"mean_second_ratio":0.983692002894451,"second_ratio_SNR":1400.4336449241532,"probe_index":181,"mean_time":10.043156655513963},"231":{"success_ratio":0.91,"success_rate":1.0716813502712088,"mean_second_ratio":0.9837005636405314,"second_ratio_SNR":1487.6747876872141,"probe_index":181,"mean_time":9.815777366168955},"232":{"success_ratio":0.84,"success_rate":0.9457329430307696,"mean_second_ratio":0.9841226929133574,"second_ratio_SNR":1622.5177948940816,"probe_index":181,"mean_time":9.703950864264877},"234":{"success_ratio":0.68,"success_rate":0.47162417656499284,"mean_second_ratio":0.9878249598054294,"second_ratio_SNR":1616.4659772640198,"probe_index":181,"mean_time":9.115521879781227},"235":{"success_ratio":0.73,"success_rate":0.4599474021792772,"mean_second_ratio":0.9880133909635206,"second_ratio_SNR":1891.9304547069112,"probe_index":181,"mean_time":9.39303181725936},"236":{"success_ratio":0.64,"success_rate":0.4346969686677943,"mean_second_ratio":0.9884202857310239,"second_ratio_SNR":1881.918259074592,"probe_index":181,"mean_time":9.198045027430705},"238":{"success_ratio":0.56,"success_rate":0.40209260479897957,"mean_second_ratio":0.98968526669258,"second_ratio_SNR":1859.6072352251526,"probe_index":181,"mean_time":9.36843580173701},"239":{"success_ratio":0.47,"success_rate":0.3708944158295283,"mean_second_ratio":0.9904479177853879,"second_ratio_SNR":1831.8815047914338,"probe_index":181,"mean_time":9.165938487177785},"240":{"success_ratio":0.3,"success_rate":0.293424647083494,"mean_second_ratio":0.9920088317377881,"second_ratio_SNR":1710.7576658811186,"probe_index":181,"mean_time":9.31045459200571},"242":{"success_ratio":0.03,"success_rate":0.041301094616676706,"mean_second_ratio":0.9956909250764202,"second_ratio_SNR":486.7528900046712,"probe_index":181,"mean_time":9.003027092975067},"244":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null},"248":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null},"256":{"success_ratio":0,"success_rate":0,"mean_second_ratio":null,"second_ratio_SNR":null,"probe_index":181,"mean_time":null}},"options":{"interval":[1,256],"min_step_width":1,"sample_size":25,"integer":true,"configuration":{"probe_length":256,"page_size":6000,"repetitions":100,"min_iterations":100,"max_cache_hit_number":3,"speculative_repetitions":256,"probe_index":181}},"worker":true,"division_property":"success_ratio"}
+{
+    "method_name": "max_cache_hit_number",
+    "division_results": {
+        "1": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null,
+            "order_index": 0
+        },
+        "2": {
+            "success_ratio": 0.62,
+            "success_rate": 0.282314027910825,
+            "mean_second_ratio": 0.8196655992462148,
+            "second_ratio_SNR": 63.43050275817737,
+            "probe_index": 181,
+            "mean_time": 10.203906942068159,
+            "order_index": 11
+        },
+        "3": {
+            "success_ratio": 0.05,
+            "success_rate": 0.03713896285732858,
+            "mean_second_ratio": 0.7251365914786968,
+            "second_ratio_SNR": 9.880004102596466,
+            "probe_index": 181,
+            "mean_time": 8.4143804643962,
+            "order_index": 14
+        },
+        "4": {
+            "success_ratio": 0.91,
+            "success_rate": 0.46892737757776504,
+            "mean_second_ratio": 0.8428307073193855,
+            "second_ratio_SNR": 115.63147813109079,
+            "probe_index": 181,
+            "mean_time": 10.150900111868566,
+            "order_index": 10
+        },
+        "8": {
+            "success_ratio": 0.95,
+            "success_rate": 0.7044551225010394,
+            "mean_second_ratio": 0.81499069944587,
+            "second_ratio_SNR": 96.34415246221377,
+            "probe_index": 181,
+            "mean_time": 9.992832748038142,
+            "order_index": 9
+        },
+        "16": {
+            "success_ratio": 0.97,
+            "success_rate": 0.7087068656892089,
+            "mean_second_ratio": 0.8389127142090297,
+            "second_ratio_SNR": 109.94555662207414,
+            "probe_index": 181,
+            "mean_time": 10.28614071143916,
+            "order_index": 8
+        },
+        "32": {
+            "success_ratio": 0.94,
+            "success_rate": 0.5042228665069634,
+            "mean_second_ratio": 0.8304227985266696,
+            "second_ratio_SNR": 132.7185243784765,
+            "probe_index": 181,
+            "mean_time": 9.256682952891962,
+            "order_index": 7
+        },
+        "64": {
+            "success_ratio": 0.98,
+            "success_rate": 0.6366654323153347,
+            "mean_second_ratio": 0.8873990636593714,
+            "second_ratio_SNR": 168.45561316794692,
+            "probe_index": 181,
+            "mean_time": 8.9330212183425,
+            "order_index": 6
+        },
+        "128": {
+            "success_ratio": 0.91,
+            "success_rate": 0.507905748321005,
+            "mean_second_ratio": 0.9210080594552559,
+            "second_ratio_SNR": 205.10316169914512,
+            "probe_index": 181,
+            "mean_time": 8.631062110699236,
+            "order_index": 2
+        },
+        "192": {
+            "success_ratio": 0.96,
+            "success_rate": 0.4380019627962942,
+            "mean_second_ratio": 0.9676532985074816,
+            "second_ratio_SNR": 523.0591518258459,
+            "probe_index": 181,
+            "mean_time": 8.74568355059109,
+            "order_index": 3
+        },
+        "224": {
+            "success_ratio": 0.94,
+            "success_rate": 0.6596222750232641,
+            "mean_second_ratio": 0.9809317596311232,
+            "second_ratio_SNR": 1143.3880610789704,
+            "probe_index": 181,
+            "mean_time": 9.150971407752788,
+            "order_index": 4
+        },
+        "228": {
+            "success_ratio": 0.91,
+            "success_rate": 0.6370416625247798,
+            "mean_second_ratio": 0.9823083038412159,
+            "second_ratio_SNR": 1410.6936193998843,
+            "probe_index": 181,
+            "mean_time": 9.455983858879023,
+            "order_index": 15
+        },
+        "230": {
+            "success_ratio": 0.95,
+            "success_rate": 0.731496225479454,
+            "mean_second_ratio": 0.9862912261431577,
+            "second_ratio_SNR": 1864.2466853798742,
+            "probe_index": 181,
+            "mean_time": 9.55539290976495,
+            "order_index": 16
+        },
+        "231": {
+            "success_ratio": 0.83,
+            "success_rate": 0.8178451848626948,
+            "mean_second_ratio": 0.9843873572023203,
+            "second_ratio_SNR": 1756.2342529897805,
+            "probe_index": 181,
+            "mean_time": 9.725565359767947,
+            "order_index": 17
+        },
+        "232": {
+            "success_ratio": 0.66,
+            "success_rate": 0.3947604521801488,
+            "mean_second_ratio": 0.9860983537444674,
+            "second_ratio_SNR": 1407.4949963983831,
+            "probe_index": 181,
+            "mean_time": 8.839958159679158,
+            "order_index": 12
+        },
+        "234": {
+            "success_ratio": 0.7,
+            "success_rate": 0.5790991533570494,
+            "mean_second_ratio": 0.9880603453178121,
+            "second_ratio_SNR": 1817.086027812816,
+            "probe_index": 181,
+            "mean_time": 9.536401533271686,
+            "order_index": 23
+        },
+        "235": {
+            "success_ratio": 0.6,
+            "success_rate": 0.6367459733776722,
+            "mean_second_ratio": 0.9875212624434142,
+            "second_ratio_SNR": 1660.4338507414782,
+            "probe_index": 181,
+            "mean_time": 9.567656170119468,
+            "order_index": 24
+        },
+        "236": {
+            "success_ratio": 0.48,
+            "success_rate": 0.301982705198844,
+            "mean_second_ratio": 0.9890110533859923,
+            "second_ratio_SNR": 1588.0414862596408,
+            "probe_index": 181,
+            "mean_time": 9.10221002223671,
+            "order_index": 13
+        },
+        "238": {
+            "success_ratio": 0.44,
+            "success_rate": 0.46849129830651276,
+            "mean_second_ratio": 0.9903155513591032,
+            "second_ratio_SNR": 1589.1669692573794,
+            "probe_index": 181,
+            "mean_time": 9.7134031416648,
+            "order_index": 20
+        },
+        "239": {
+            "success_ratio": 0.39,
+            "success_rate": 0.42093901780898596,
+            "mean_second_ratio": 0.9912476719205696,
+            "second_ratio_SNR": 1629.852709540345,
+            "probe_index": 181,
+            "mean_time": 9.64014602546513,
+            "order_index": 22
+        },
+        "240": {
+            "success_ratio": 0.24,
+            "success_rate": 0.21674812783802055,
+            "mean_second_ratio": 0.9917026010264113,
+            "second_ratio_SNR": 1321.614970044148,
+            "probe_index": 181,
+            "mean_time": 9.012723994456413,
+            "order_index": 5
+        },
+        "242": {
+            "success_ratio": 0.06,
+            "success_rate": 0.12111278426177895,
+            "mean_second_ratio": 0.9935609208555564,
+            "second_ratio_SNR": 630.2025137064079,
+            "probe_index": 181,
+            "mean_time": 9.210872149800538,
+            "order_index": 21
+        },
+        "244": {
+            "success_ratio": 0.01,
+            "success_rate": 0.028760177507812266,
+            "mean_second_ratio": 0.9980276134122288,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": 10.177331590466926,
+            "order_index": 19
+        },
+        "248": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null,
+            "order_index": 18
+        },
+        "256": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null,
+            "order_index": 1
+        }
+    },
+    "sequential_results": {
+        "1": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null
+        },
+        "2": {
+            "success_ratio": 0.68,
+            "success_rate": 0.2477585141484679,
+            "mean_second_ratio": 0.8709776592768352,
+            "second_ratio_SNR": 102.38595098295045,
+            "probe_index": 181,
+            "mean_time": 10.214810994306571
+        },
+        "3": {
+            "success_ratio": 0.88,
+            "success_rate": 0.40335906428030815,
+            "mean_second_ratio": 0.8416984731087176,
+            "second_ratio_SNR": 90.25163598922346,
+            "probe_index": 181,
+            "mean_time": 10.130783146601273
+        },
+        "4": {
+            "success_ratio": 0.9,
+            "success_rate": 0.43208655557882014,
+            "mean_second_ratio": 0.8611954978974293,
+            "second_ratio_SNR": 126.39197321128722,
+            "probe_index": 181,
+            "mean_time": 9.955154987996513
+        },
+        "8": {
+            "success_ratio": 0.98,
+            "success_rate": 0.5971833663713615,
+            "mean_second_ratio": 0.83218892509056,
+            "second_ratio_SNR": 111.26743875006613,
+            "probe_index": 181,
+            "mean_time": 9.847332921703313
+        },
+        "16": {
+            "success_ratio": 0.96,
+            "success_rate": 0.6751757566891291,
+            "mean_second_ratio": 0.8461323830742252,
+            "second_ratio_SNR": 119.57700045211185,
+            "probe_index": 181,
+            "mean_time": 10.319247377504903
+        },
+        "32": {
+            "success_ratio": 0.97,
+            "success_rate": 0.47910911389014565,
+            "mean_second_ratio": 0.8577009428458464,
+            "second_ratio_SNR": 150.5239903029102,
+            "probe_index": 181,
+            "mean_time": 9.385820457222168
+        },
+        "64": {
+            "success_ratio": 0.96,
+            "success_rate": 0.5149952121539411,
+            "mean_second_ratio": 0.8951176637640402,
+            "second_ratio_SNR": 165.71985439100666,
+            "probe_index": 181,
+            "mean_time": 9.142598025739046
+        },
+        "128": {
+            "success_ratio": 0.97,
+            "success_rate": 1.0536514998785993,
+            "mean_second_ratio": 0.9407372420760737,
+            "second_ratio_SNR": 244.5120641314524,
+            "probe_index": 181,
+            "mean_time": 9.44686031598464
+        },
+        "192": {
+            "success_ratio": 0.9,
+            "success_rate": 0.7496751407723552,
+            "mean_second_ratio": 0.9716473159048312,
+            "second_ratio_SNR": 663.0661477853535,
+            "probe_index": 181,
+            "mean_time": 9.273397337411431
+        },
+        "224": {
+            "success_ratio": 0.95,
+            "success_rate": 0.802897869700755,
+            "mean_second_ratio": 0.9835207143392327,
+            "second_ratio_SNR": 1192.0751949401467,
+            "probe_index": 181,
+            "mean_time": 9.292003702414348
+        },
+        "228": {
+            "success_ratio": 0.93,
+            "success_rate": 0.9443244576987121,
+            "mean_second_ratio": 0.9812771644676513,
+            "second_ratio_SNR": 1373.0415960358882,
+            "probe_index": 181,
+            "mean_time": 9.852074315946004
+        },
+        "230": {
+            "success_ratio": 0.87,
+            "success_rate": 1.1587470082353883,
+            "mean_second_ratio": 0.983692002894451,
+            "second_ratio_SNR": 1400.4336449241532,
+            "probe_index": 181,
+            "mean_time": 10.043156655513963
+        },
+        "231": {
+            "success_ratio": 0.91,
+            "success_rate": 1.0716813502712088,
+            "mean_second_ratio": 0.9837005636405314,
+            "second_ratio_SNR": 1487.6747876872141,
+            "probe_index": 181,
+            "mean_time": 9.815777366168955
+        },
+        "232": {
+            "success_ratio": 0.84,
+            "success_rate": 0.9457329430307696,
+            "mean_second_ratio": 0.9841226929133574,
+            "second_ratio_SNR": 1622.5177948940816,
+            "probe_index": 181,
+            "mean_time": 9.703950864264877
+        },
+        "234": {
+            "success_ratio": 0.68,
+            "success_rate": 0.47162417656499284,
+            "mean_second_ratio": 0.9878249598054294,
+            "second_ratio_SNR": 1616.4659772640198,
+            "probe_index": 181,
+            "mean_time": 9.115521879781227
+        },
+        "235": {
+            "success_ratio": 0.73,
+            "success_rate": 0.4599474021792772,
+            "mean_second_ratio": 0.9880133909635206,
+            "second_ratio_SNR": 1891.9304547069112,
+            "probe_index": 181,
+            "mean_time": 9.39303181725936
+        },
+        "236": {
+            "success_ratio": 0.64,
+            "success_rate": 0.4346969686677943,
+            "mean_second_ratio": 0.9884202857310239,
+            "second_ratio_SNR": 1881.918259074592,
+            "probe_index": 181,
+            "mean_time": 9.198045027430705
+        },
+        "238": {
+            "success_ratio": 0.56,
+            "success_rate": 0.40209260479897957,
+            "mean_second_ratio": 0.98968526669258,
+            "second_ratio_SNR": 1859.6072352251526,
+            "probe_index": 181,
+            "mean_time": 9.36843580173701
+        },
+        "239": {
+            "success_ratio": 0.47,
+            "success_rate": 0.3708944158295283,
+            "mean_second_ratio": 0.9904479177853879,
+            "second_ratio_SNR": 1831.8815047914338,
+            "probe_index": 181,
+            "mean_time": 9.165938487177785
+        },
+        "240": {
+            "success_ratio": 0.3,
+            "success_rate": 0.293424647083494,
+            "mean_second_ratio": 0.9920088317377881,
+            "second_ratio_SNR": 1710.7576658811186,
+            "probe_index": 181,
+            "mean_time": 9.31045459200571
+        },
+        "242": {
+            "success_ratio": 0.03,
+            "success_rate": 0.041301094616676706,
+            "mean_second_ratio": 0.9956909250764202,
+            "second_ratio_SNR": 486.7528900046712,
+            "probe_index": 181,
+            "mean_time": 9.003027092975067
+        },
+        "244": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null
+        },
+        "248": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null
+        },
+        "256": {
+            "success_ratio": 0,
+            "success_rate": 0,
+            "mean_second_ratio": null,
+            "second_ratio_SNR": null,
+            "probe_index": 181,
+            "mean_time": null
+        }
+    },
+    "options": {
+        "interval": [1, 256],
+        "min_step_width": 1,
+        "sample_size": 25,
+        "integer": true,
+        "configuration": {
+            "probe_length": 256,
+            "page_size": 6000,
+            "repetitions": 100,
+            "min_iterations": 100,
+            "max_cache_hit_number": 3,
+            "speculative_repetitions": 256,
+            "probe_index": 181
+        }
+    },
+    "worker": true,
+    "division_property": "success_ratio"
+}

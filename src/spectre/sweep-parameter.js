@@ -1,10 +1,10 @@
-import statisticallyReadMemory_promise from "../analysis/staistically-read-memory.js";
+import statisticallyReadMemory_promise from "../analysis/statistically-read-memory.js";
 import divideInterval from "../helper/divide-interval.js";
 import configuration from "../configuration.js";
 
 export default
 (async () => {
-    const testIndexRepeatedly = await testIndexRepeatedly_promise;
+    const statisticallyReadMemory = await statisticallyReadMemory_promise;
     
     const method_options = {
         page_size: {
@@ -14,8 +14,8 @@ export default
             sample_size: 25,
             integer: true,
             configuration: {
-                repetitions: 2e2,
-                min_iterations: 100,
+                repetitions: 5e1,
+                min_iterations: 300,
                 max_cache_hit_number: 8
             }
         },
@@ -122,10 +122,9 @@ export default
         };
         if (isNaN(address)) {
             address = Math.random() * 256 | 0;
-            options.configuration.probe_index = probe_index;
+            options.configuration.address = address;
         }
-        const address = Math.random() * 1e4 | 0;
-        return await statisticallyReadMemory_promise(address, speculative_repetitions, repetitions, min_iterations, max_cache_hit_number, page_size, probe_length);
+        return await statisticallyReadMemory(address, speculative_repetitions, repetitions, min_iterations, max_cache_hit_number, page_size, probe_length);
     }
     
     function notify(is_download) {

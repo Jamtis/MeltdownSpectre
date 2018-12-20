@@ -5,8 +5,16 @@ async function divideInterval(options) {
         sample_size,
         getter,
         min_step_width,
-        integer
+        integer,
+        mode
     } = options;
+    switch (mode) {
+        case "distance":
+        case "area":
+            break;
+        default:
+            mode = "distance";
+    }
     const pairs = [];
     pairs.push([interval_start, await getter(interval_start)]);
     if (interval_end != interval_start) {
@@ -25,21 +33,35 @@ async function divideInterval(options) {
         while (pairs.length < sample_size) {
             pairs.sort(([a], [b]) => a - b);
             let max_index;
-            let max_value_difference;
+            let max_criterium;
             let max_distance = 0;
             for (let i = 0; i < pairs.length - 1; ++i) {
                 const value_difference = Math.abs(pairs[i + 1][1] - pairs[i][1]);
                 const distance = pairs[i + 1][0] - pairs[i][0];
                 if (distance >= 2 * min_step_width) {
-                    if (value_difference > max_value_difference || isNaN(max_value_difference)) {
-                        max_value_difference = value_difference;
-                        max_distance = distance;
-                        max_index = i;
-                    } else if (value_difference == max_value_difference) {
-                        // select for max_distance
-                        if (distance > max_distance) {
+                    if (mode == "distance") {
+                        if (value_difference > max_criterium || isNaN(max_criterium)) {
+                            max_criterium = value_difference;
                             max_distance = distance;
                             max_index = i;
+                        } else if (value_difference == max_criterium) {
+                            // select for max_distance
+                            if (distance > max_distance) {
+                                max_distance = distance;
+                                max_index = i;
+                            }
+                        }
+                    } else {
+                        if (value_difference * distance > max_criterium || isNaN(max_criterium)) {
+                            max_criterium = value_difference * max_criterium;
+                            max_distance = distance;
+                            max_index = i;
+                        } else if (value_difference * distance == max_criterium) {
+                            // select for max_distance
+                            if (distance > max_distance) {
+                                max_distance = distance;
+                                max_index = i;
+                            }
                         }
                     }
                 }

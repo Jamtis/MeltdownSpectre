@@ -6,7 +6,7 @@ const worker = new Worker("./worker.js" + location.search, {
 });
 worker.addEventListener("message", draw);
 
-const trace_names = ["success_ratio", "success_rate", "mean_second_ratio", "second_ratio_SNR", "mean_time", "mean_total_iterations", "total_iterations_SNR", "probe_index", "order_index"];
+const trace_names = ["success_ratio", "success_rate", "mean_second_ratio", "second_ratio_SNR", "mean_time", "mean_total_iterations", "total_iterations_SNR", "address", "order_index"];
 
 function draw({data}) {
     const {

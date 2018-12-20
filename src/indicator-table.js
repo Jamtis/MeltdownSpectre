@@ -16,9 +16,10 @@ export default (async () => {
             const mean_time = mean(time_table);
             // console.log(`%cmean ${mean_time | 0}`, "font-size: 1em");
 
-            if (mean_time >= 5) {
+            if (mean_time > 0) {
                 // count potential cache hits
                 // percentile variant
+                // accumulate counts / histogram
                 const time_counts = [];
                 for (const time of time_table) {
                     time_counts[time] = (time_counts[time] | 0) + 1;
