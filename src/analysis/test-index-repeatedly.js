@@ -20,6 +20,7 @@ export default (async () => {
         let second_ratios = [];
         let mean_times = [];
         let total_iterations_array = [];
+        let total_iterations_failing_array = [];
         // console.groupCollapsed("probe_index " + probe_index);
         for (let i = 0; i < repetitions; ++i) {
             // new microtask
@@ -32,13 +33,15 @@ export default (async () => {
                 normalized_indicator_table,
                 mean_time,
                 total_iterations
-            } = testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length);
+            } = await testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length);
             // console.assert(max_indicator_index === undefined ^ second_ratio < 1, "second_ratio is 1 iff index test failed");
             if (max_indicator_index == probe_index) {
                 ++successes;
                 second_ratios.push(second_ratio);
                 mean_times.push(mean_time);
                 total_iterations_array.push(total_iterations);
+            } else {
+                total_iterations_failing_array.push(total_iterations);
             }
             // console.log("sir", second_ratio);
         }
@@ -49,6 +52,7 @@ export default (async () => {
         const mean_time = mean(mean_times);
         const mean_total_iterations = mean(total_iterations_array);
         const total_iterations_SNR = -zIndex(total_iterations_array);
+        const mean_total_iterations_failing = mean(total_iterations_failing_array);
         return {
             success_ratio: successes / repetitions,
             success_rate,
@@ -57,7 +61,8 @@ export default (async () => {
             probe_index,
             mean_time,
             mean_total_iterations,
-            total_iterations_SNR
+            total_iterations_SNR,
+            mean_total_iterations_failing
         };
     };
 })();

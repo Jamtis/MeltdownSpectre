@@ -13,7 +13,7 @@ async function divideInterval(options) {
         case "area":
             break;
         default:
-            mode = "distance";
+            mode = "area";
     }
     const pairs = [];
     pairs.push([interval_start, await getter(interval_start)]);
@@ -53,7 +53,7 @@ async function divideInterval(options) {
                         }
                     } else {
                         if (value_difference * distance > max_criterium || isNaN(max_criterium)) {
-                            max_criterium = value_difference * max_criterium;
+                            max_criterium = value_difference * distance;
                             max_distance = distance;
                             max_index = i;
                         } else if (value_difference * distance == max_criterium) {

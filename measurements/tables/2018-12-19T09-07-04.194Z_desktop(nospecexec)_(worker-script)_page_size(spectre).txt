@@ -1,0 +1,26 @@
+index	success_ratio (division)	success_rate (division)	mean_second_ratio (division)	second_ratio_SNR (division)	address (division)	mean_time (division)	mean_total_iterations (division)	total_iterations_SNR (division)	order_index (division)	success_ratio (sequential)	success_rate (sequential)	mean_second_ratio (sequential)	second_ratio_SNR (sequential)	address (sequential)	mean_time (sequential)	mean_total_iterations (sequential)	total_iterations_SNR (sequential)	order_index (sequential)
+0	0	0			21				0	0	0			74				
+187	0	0			39				17	0	0			35				
+375	0	0			62				9	0	0			125				
+562	0	0			86				18	0	0			58				
+750	0	0			11				5	0	0			192				
+937	0	0			241				19	0	0			208				
+1125	0	0			142				10	0	0			79				
+1312	0	0			207				20	0	0			250				
+1500	0	0			27				3	0	0			237				
+1687	0	0			216				21	0	0			181				
+1875	0	0			7				11	0	0			138				
+2062	0	0			36				22	0	0			112				
+2250	0	0			75				6	0	0			211				
+2437	0	0			88				23	0	0			165				
+2625	0	0			202				12	0	0			19				
+2812	0	0			131				24	0	0			218				
+3000	0	0			172				2	0	0			108				
+3375	0	0			150				13	0	0			90				
+3750	0	0			19				7	0	0			140				
+4125	0	0			125				14	0	0			69				
+4500	0	0			102				4	0	0			233				
+4875	0	0			125				15	0	0			170				
+5250	0	0			250				8	0	0			133				
+5625	0	0			94				16	0	0			223				
+6000	0	0			59				1	0	0			66				

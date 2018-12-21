@@ -11,8 +11,8 @@ export default (async () => {
     function flushReloadProbe(probe_index, page_size, probe_length) {
         const time_table = new Uint32Array(probe_length);
         
-        // const probe_table = new Uint8Array(probe_length * page_size);
-        const probe_table = big_table.getSubarray(probe_length * page_size);
+        const probe_table = new Uint8Array(probe_length * page_size);
+        // const probe_table = big_table.getSubarray(probe_length * page_size);
         
         // probeTable[0] is always fast for sme reason so average that access out by randomizing the acutal probing index
         const random_offset = Math.random() * 256 | 0;

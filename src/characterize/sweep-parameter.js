@@ -8,14 +8,14 @@ export default
     
     const method_options = {
         page_size: {
-            interval: [0, 2e4],
+            interval: [0, 5e4],
             min_step_width: 40,
             getter,
             sample_size: 100,
             integer: true,
             configuration: {
-                repetitions: 1e2,
-                min_iterations: 100,
+                repetitions: 2e3,
+                min_iterations: 10,
                 max_cache_hit_number: 8
             }
         },
@@ -23,12 +23,12 @@ export default
             interval: [1, 256],
             min_step_width: 1,
             getter,
-            sample_size: 25,
+            sample_size: 256,
             integer: true,
             configuration: {
-                repetitions: 1e2,
-                page_size: 6e3,
-                min_iterations: 100
+                repetitions: 5e3,
+                page_size: 5e3,
+                min_iterations: 10
             }
         },
         min_iterations: {
@@ -38,8 +38,9 @@ export default
             sample_size: 25,
             integer: true,
             configuration: {
-                repetitions: 1e2,
-                max_cache_hit_number: 8
+                repetitions: 1e3,
+                max_cache_hit_number: 8,
+                page_size: 5e3
             }
         },
         probe_length: {

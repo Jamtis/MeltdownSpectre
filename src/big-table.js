@@ -14,10 +14,10 @@ class BigTable {
         return this.array.subarray(this.pointer, this.pointer + size);
     }
 };
-export default new ProbeTable(1 << 29);
+export default new BigTable(1 << 28);
 */
 
-// seems to mitigate crashes on Chrome
+// seems to mitigate crashes on Chrome but slow
 export default {
     getSubarray(size) {
         return new Uint8Array(size);

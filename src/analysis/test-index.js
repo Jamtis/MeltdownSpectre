@@ -6,14 +6,14 @@ export default (async () => {
     const IndicatorTable = await indicator_table_promise;
     const flushReloadProbe = await flushReloadProbe_promise;
     
-    return function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length) {
+    return async function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length) {
         const indicator_table = new IndicatorTable(probe_length);
         let max_indicator;
         let max_indicator_index;
         const mean_times = [];
         // console.log("probe_index", probe_index);
         let i = 0, total_iterations = 0;
-        for (let j = 0; i < min_iterations && j < min_iterations; ++total_iterations) {
+        for (; i < min_iterations; ++total_iterations) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
             const time_table = flushReloadProbe(probe_index, page_size, probe_length);
@@ -22,10 +22,11 @@ export default (async () => {
             const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
             if (mean_time) {
                 mean_times.push(mean_time);
-                j = 0;
             } else {
                 // console.warn("slow timer");
-                ++j;
+                if (total_iterations > min_iterations) {
+                    break;
+                }
                 continue;
             }
             // console.log(`%cprobe index time ${time_table[probe_index]}`, "font-size: .9em");
@@ -42,7 +43,6 @@ export default (async () => {
             if (max_indicator_index != current_max_indicator_index) {
                 i = (current_max_indicator_index !== undefined) | 0;
                 max_indicator_index = current_max_indicator_index;
-                ++j;
                 // console.warn("max_indicator_index changed");
             } else {
                 ++i;
