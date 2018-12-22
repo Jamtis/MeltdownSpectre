@@ -54,6 +54,6 @@ byte speculativelyReadAddress(unsigned address, unsigned repetitions, unsigned p
     }
     // freeing not possible due to WASM linear memory and FIRST_USE_PARADIGM
     // just reset the current_memory_position without zeroing
-    free(valid_access_indicator_array);
+    // free(valid_access_indicator_array);
     return junk;
 }

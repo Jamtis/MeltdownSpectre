@@ -8,14 +8,14 @@ export default
     
     const method_options = {
         page_size: {
-            interval: [0, 5e4],
-            min_step_width: 40,
+            interval: [0, 8e3],
+            min_step_width: 5,
             getter,
             sample_size: 100,
             integer: true,
             configuration: {
-                repetitions: 2e3,
-                min_iterations: 10,
+                repetitions: 1e3,
+                min_iterations: 6,
                 max_cache_hit_number: 8
             }
         },

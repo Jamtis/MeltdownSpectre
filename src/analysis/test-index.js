@@ -1,10 +1,10 @@
 import {mean, zIndex} from "../helper/math.js";
-import flushReloadProbe_promise from "./flush-reload-probe.js";
+import allocReloadProbe_promise from "./alloc-reload-probe.js";
 import indicator_table_promise from "../indicator-table.js";
 
 export default (async () => {
     const IndicatorTable = await indicator_table_promise;
-    const flushReloadProbe = await flushReloadProbe_promise;
+    const allocReloadProbe = await allocReloadProbe_promise;
     
     return async function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length) {
         const indicator_table = new IndicatorTable(probe_length);
@@ -16,7 +16,7 @@ export default (async () => {
         for (; i < min_iterations; ++total_iterations) {
             // await Promise.resolve();
             // await new Promise(resolve => setTimeout(resolve, 0));
-            const time_table = flushReloadProbe(probe_index, page_size, probe_length);
+            const time_table = allocReloadProbe(probe_index, page_size, probe_length);
             // for (let i = 0; i < 1e8; ++i);
             // console.log("tt", [...time_table]);
             const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);

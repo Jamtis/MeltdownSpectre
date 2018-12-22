@@ -6,9 +6,10 @@ let junk = 0;
 
 export default (async () => {
     const timer = await timer_promise;
-    return (...args) => deopt(flushReloadProbe)(...args);
+    return allocReloadProbe;
+    return (...args) => deopt(allocReloadProbe)(...args);
     
-    function flushReloadProbe(probe_index, page_size, probe_length) {
+    function allocReloadProbe(probe_index, page_size, probe_length) {
         const time_table = new Uint32Array(probe_length);
         
         const probe_table = new Uint8Array(probe_length * page_size);

