@@ -15,7 +15,10 @@ try {
             let {test_results, display_data, division_results, sequential_results} = JSON.parse(input_content);
             division_results = division_results || test_results || display_data; // legacy support
             const property_names = new Set;
-            console.assert(division_results, file);
+            if (!division_results) {
+                console.assert(division_results, file);
+                break;
+            }
             // gather all property names
             for (const entry of Object.values(division_results)) {
                 for (const property_name of Object.keys(entry)) {

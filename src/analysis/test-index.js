@@ -1,9 +1,8 @@
 import {mean, zIndex} from "../helper/math.js";
 import allocReloadProbe_promise from "./alloc-reload-probe.js";
-import indicator_table_promise from "../indicator-table.js";
+import IndicatorTable from "../indicator-table.js";
 
 export default (async () => {
-    const IndicatorTable = await indicator_table_promise;
     const allocReloadProbe = await allocReloadProbe_promise;
     
     return async function testIndex(probe_index, min_iterations, max_cache_hit_number, page_size, probe_length) {

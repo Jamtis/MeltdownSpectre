@@ -8,14 +8,14 @@ export default
     
     const method_options = {
         page_size: {
-            interval: [0, 8e3],
-            min_step_width: 5,
+            interval: [0, 1e4],
+            min_step_width: 1,
             getter,
-            sample_size: 100,
+            sample_size: 300,
             integer: true,
             configuration: {
-                repetitions: 1e3,
-                min_iterations: 6,
+                repetitions: 5e2,
+                min_iterations: 16,
                 max_cache_hit_number: 8
             }
         },
@@ -26,21 +26,21 @@ export default
             sample_size: 256,
             integer: true,
             configuration: {
-                repetitions: 5e3,
-                page_size: 5e3,
-                min_iterations: 10
+                repetitions: 1e2,
+                page_size: 6e3,
+                min_iterations: 1e2
             }
         },
         min_iterations: {
             interval: [1, 500],
             min_step_width: 1,
             getter,
-            sample_size: 25,
+            sample_size: 100,
             integer: true,
             configuration: {
-                repetitions: 1e3,
-                max_cache_hit_number: 8,
-                page_size: 5e3
+                repetitions: 1e2,
+                max_cache_hit_number: 10,
+                page_size: 6e3
             }
         },
         probe_length: {
@@ -136,7 +136,8 @@ export default
                 sequential_results,
                 options,
                 worker: true,
-                division_property
+                division_property,
+                userAgent: navigator.userAgent
             }
         }));
         postMessage(message);

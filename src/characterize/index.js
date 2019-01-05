@@ -11,9 +11,9 @@ const trace_names = ["success_ratio",
                      "mean_second_ratio",
                      "second_ratio_SNR",
                      "mean_time",
+                     "mean_total_iterations_failing",
                      "mean_total_iterations",
                      "total_iterations_SNR",
-                     "mean_total_iterations_failing",
                      "probe_index",
                      "order_index"];
 

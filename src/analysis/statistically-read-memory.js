@@ -12,6 +12,7 @@ export default
         let second_ratios = [];
         let mean_times = [];
         let total_iterations_array = [];
+        let total_iterations_failing_array = [];
         for (let i = 0; i < repetitions; ++i) {
             const {
                 max_indicator_index,
@@ -27,6 +28,8 @@ export default
                 second_ratios.push(second_ratio);
                 mean_times.push(mean_time);
                 total_iterations_array.push(total_iterations);
+            } else {
+                total_iterations_failing_array.push(total_iterations);
             }
         }
         const success_rate = successes / (performance.now() - begin) * 1e3;
@@ -35,6 +38,7 @@ export default
         const mean_time = mean(mean_times);
         const mean_total_iterations = mean(total_iterations_array);
         const total_iterations_SNR = -zIndex(total_iterations_array);
+        const mean_total_iterations_failing = mean(total_iterations_failing_array);
         return {
             success_ratio: successes / repetitions,
             success_rate,
@@ -43,7 +47,8 @@ export default
             address,
             mean_time,
             mean_total_iterations,
-            total_iterations_SNR
+            total_iterations_SNR,
+            mean_total_iterations_failing
         };
     }
 })();
