@@ -1,8 +1,8 @@
-let _export;
+let Timer_promise;
 if (typeof performance != "undefined") {
     const sharedbuffer = new SharedArrayBuffer(Uint32Array.BYTES_PER_ELEMENT);
     const array = new Uint32Array(sharedbuffer);
-    _export = (async () => {
+    Timer_promise = (async () => {
         const worker = new Worker("../time-worker.js");
         const Timer = {
             restore() {
@@ -28,7 +28,7 @@ if (typeof performance != "undefined") {
     })();
 } else {
     let begin;
-    _export = (async () => {
+    Timer_promise = (async () => {
         const {hrtime} = (await eval(`import("process")`)).default;
         const Timer = {
             restore() {
@@ -44,7 +44,7 @@ if (typeof performance != "undefined") {
     })();
 }
 
-export default _export;
+export default Timer_promise;
 
 /*
 const sharedbuffer = new SharedArrayBuffer(Uint32Array.BYTES_PER_ELEMENT);

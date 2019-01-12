@@ -1,0 +1,35 @@
+{
+    "bundles": {
+        "app": {
+            "scripts": {
+                "src": "src/**/*.js",
+                "dest": "build",
+                "chain": ["gulp-babili"],
+                "watch": false
+            }
+        }
+    },
+    "modules": {
+        "gulp-htmlmin": {
+            "removeComments": true,
+            "useShortDoctype": true,
+            "customAttrAssign": ["?=", "$="],
+            "minifyJS": true,
+            "minifyCSS": false,
+            "collapseWhitespace": true
+        },
+        "gulp-babel": {
+            
+        },
+        "gulp-babili": {},
+        "gulp-less": {
+            "ieCompat": false,
+            "compress": false,
+            "optimization": 0
+        },
+        "gulp-clean-css": {},
+        "gulp-watch": {
+            "ignoreInitial": false
+        }
+    }
+}

@@ -25,16 +25,14 @@ class IndicatorTable extends Uint32Array {
                 time_counts[time] = (time_counts[time] | 0) + 1;
             }
             let selector_threshold = 0;
-            let last_sum;
-            for (let sum_counts = 0; sum_counts < max_cache_hit_number && sum_counts < time_table.length; ++selector_threshold) {
-                last_sum = sum_counts;
+            for (var sum_counts = 0; sum_counts < max_cache_hit_number && sum_counts < time_table.length; ++selector_threshold) {
                 sum_counts += time_counts[selector_threshold] | 0;
             }
             --selector_threshold;
             // unique threshold variant
             // const selector_threshold = mean_time * (1 - cache_hit_weight) + min_value * cache_hit_weight;
             // select all times lower than threshold
-            if (selector_threshold && last_sum) {
+            if (selector_threshold && sum_counts) {
                 for (let i = 0; i < time_table.length; ++i) {
                     const value = time_table[i];
                     if (value <= selector_threshold) {

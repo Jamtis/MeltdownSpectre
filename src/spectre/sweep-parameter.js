@@ -2,22 +2,21 @@ import statisticallyReadMemory_promise from "../analysis/statistically-read-memo
 import divideInterval from "../helper/divide-interval.js";
 import configuration from "../configuration.js";
 
-export default
-(async () => {
+const sweepParameter = (async () => {
     const statisticallyReadMemory = await statisticallyReadMemory_promise;
     
     const method_options = {
         page_size: {
-            interval: [0, 8e4],
+            interval: [6e3, 8e4],
             min_step_width: 10,
             getter,
             sample_size: 2,
             integer: true,
             configuration: {
                 repetitions: 2e2,
-                min_iterations: 900,
-                max_cache_hit_number: 6,
-                speculative_repetitions: 10
+                min_iterations: 100,
+                max_cache_hit_number: 20,
+                speculative_repetitions: 20
             }
         },
         max_cache_hit_number: {
@@ -29,7 +28,7 @@ export default
             configuration: {
                 repetitions: 1e2,
                 page_size: 6e3,
-                min_iterations: 100
+                min_iterations: 400
             }
         },
         min_iterations: {
@@ -143,3 +142,5 @@ export default
         postMessage(message);
     }
 })();
+
+export default sweepParameter;

@@ -1,6 +1,6 @@
-import testIndexRepeatedly_promise from "../analysis/test-index-repeatedly.js";
-import divideInterval from "../helper/divide-interval.js";
-import configuration from "../configuration.js";
+import testIndexRepeatedly_promise from "../../analysis/test-index-repeatedly.js";
+import divideInterval from "../../helper/divide-interval.js";
+import configuration from "../../configuration.js";
 
 const sweepParameter = (async () => {
     const testIndexRepeatedly = await testIndexRepeatedly_promise;
@@ -139,7 +139,7 @@ const sweepParameter = (async () => {
                 userAgent: navigator.userAgent
             }
         }));
-        postMessage(message);
+        draw({data: message});
     }
 })();
 

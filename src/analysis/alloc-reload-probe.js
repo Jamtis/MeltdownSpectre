@@ -1,6 +1,6 @@
 // import evictCache from "./evict-cache.js";
 import timer_promise from "../timer.js";
-import big_table from "../big-table.js";
+// import big_table from "../big-table.js";
 
 let junk = 0;
 

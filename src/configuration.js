@@ -5,7 +5,7 @@ export const repetitions = 500;
 export const probe_length = 1 << 8;
 export const speculative_repetitions = 10;
 export const probe_index = undefined;
-export default {
+const configuration = {
     probe_length,
     page_size,
     repetitions,
@@ -13,3 +13,5 @@ export default {
     max_cache_hit_number,
     speculative_repetitions
 };
+
+export default configuration;
