@@ -1,5 +1,31 @@
 let Timer_promise;
-if (typeof performance != "undefined") {
+if (typeof Worker == "undefined") {
+    // in worker in old chrome
+    Timer_promise = (async () => {
+        const sharedbuffer = await new Promise(resolve => {
+            addEventListener("message", event => {
+                resolve(event.data);
+            });
+        });
+        const array = new Uint32Array(sharedbuffer);
+        const Timer = {
+            restore() {
+                Atomics.store(array, 0, 0);
+                // array[0] = 0;
+                // console.log("dl", array[0]);
+                // return Timer.load();
+            },
+            load() {
+                return Atomics.load(array, 0);
+                // return array[0];
+            },
+            terminate() {
+                worker.terminate();
+            }
+        };
+        return Timer;
+    })();
+} else if (typeof performance != "undefined") {
     const sharedbuffer = new SharedArrayBuffer(Uint32Array.BYTES_PER_ELEMENT);
     const array = new Uint32Array(sharedbuffer);
     Timer_promise = (async () => {
@@ -19,12 +45,14 @@ if (typeof performance != "undefined") {
                 worker.terminate();
             }
         };
-        return new Promise(resolve => {
+        const promise = new Promise(resolve => {
             worker.addEventListener("message", () => {
                 resolve(Timer);
             });
             worker.postMessage(sharedbuffer);
         });
+        promise.buffer  = sharedbuffer;
+        return promise;
     })();
 } else {
     let begin;

@@ -7,39 +7,39 @@ const sweepParameter = (async () => {
     
     const method_options = {
         page_size: {
-            interval: [0, 1e4],
+            interval: [0, 1e6],
             min_step_width: 1,
             getter,
-            sample_size: 300,
+            sample_size: 25,
             integer: true,
             configuration: {
-                repetitions: 5e2,
-                min_iterations: 10,
-                max_cache_hit_number: 20
+                repetitions: 50,
+                min_iterations: 30,
+                max_cache_hit_number: 60
             }
         },
         max_cache_hit_number: {
             interval: [1, 256],
             min_step_width: 1,
             getter,
-            sample_size: 256,
+            sample_size: 15,
             integer: true,
             configuration: {
-                repetitions: 1e2,
-                page_size: 6e3,
-                min_iterations: 1e2
+                repetitions: 100,
+                page_size: 3e4,
+                min_iterations: 30
             }
         },
         min_iterations: {
-            interval: [1, 500],
+            interval: [1, 50],
             min_step_width: 1,
             getter,
-            sample_size: 100,
+            sample_size: 30,
             integer: true,
             configuration: {
-                repetitions: 1e2,
+                repetitions: 1e3,
                 max_cache_hit_number: 60,
-                page_size: 6e3
+                page_size: 1e5
             }
         },
         probe_length: {

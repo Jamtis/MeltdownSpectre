@@ -8,7 +8,7 @@ for (const task_name in tasks) {
     const task_function = pipe_part => {
         for (const part of task.chain) {
             const module_name = typeof part == "string" ? part : part.module;
-            const module_settings = (typeof part == "string" ? null : part.settings) || modules[module_name];
+            const module_settings = (typeof part == "string" ? null : part.settings) || modules[module_name] || [];
             let pipe_function = require(module_name);
             if (typeof pipe_function != "function") {
                 pipe_function = pipe_function.default;
