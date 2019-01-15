@@ -139,7 +139,7 @@ const sweepParameter = (async () => {
                 userAgent: navigator.userAgent
             }
         }));
-        draw({data: message});
+        postMessage(message);
     }
 })();
 

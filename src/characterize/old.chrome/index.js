@@ -1,10 +1,10 @@
 import plot from "../../helper/plot.js";
 import download from "../../helper/download.js";
 
-/*const worker = new Worker("./worker.js" + location.search, {
-    type: "module"
+const worker = new Worker("./worker.prep.js" + location.search, {
+    type: "classic"
 });
-worker.addEventListener("message", draw);*/
+worker.addEventListener("message", draw);
 
 const trace_names = ["success_ratio",
                      "success_rate",
@@ -17,7 +17,7 @@ const trace_names = ["success_ratio",
                      "probe_index",
                      "order_index"];
 
-window.draw = function draw({data}) {
+function draw({data}) {
     const {
         storage,
         download: download_string
@@ -33,32 +33,3 @@ window.draw = function draw({data}) {
     plot(storage.division_results, trace_names, trace_name => trace_name + " (division)");
     plot(storage.sequential_results, trace_names, trace_name => trace_name + " (sequential)");
 };
-
-import sweepParameter_promise from "./sweep-parameter.js";
-import timer_promise from "../../timer.js";
-
-(async () => {
-    const timer = await timer_promise;
-    // overwrite
-    /*let before;
-    timer.restore = () => {
-        before = performance.now();
-    };
-    timer.load = () => {
-        return performance.now() - before;
-    };*/
-    const sweepParameter = await sweepParameter_promise;
-    
-    console.time("test");
-    try {
-        const method_name = new URL(location).searchParams.get("method");
-        const division_property = new URL(location).searchParams.get("division") || "success_ratio";
-        console.log("start sweep", method_name);
-        await sweepParameter(method_name, division_property);
-    } catch (error) {
-        console.error(error);
-    } finally {
-        timer.terminate();
-        console.timeEnd("test");
-    }
-})();

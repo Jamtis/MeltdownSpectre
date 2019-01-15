@@ -1,5 +1,5 @@
 import sweepParameter_promise from "./sweep-parameter.js";
-// import timer_promise from "../../timer.js";
+import timer_promise from "../../timer.js";
 
 (async () => {
     const timer = await timer_promise;
@@ -22,6 +22,7 @@ import sweepParameter_promise from "./sweep-parameter.js";
     } catch (error) {
         console.error(error);
     } finally {
+        timer.terminate();
         console.timeEnd("test");
     }
 })();
