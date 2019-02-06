@@ -16,7 +16,7 @@ module.exports = {
             "chain": [{
                 module: "gulp-babel",
                 settings: [{
-                    "plugins": []
+                    "plugins": ["@babel/plugin-syntax-dynamic-import"]
                 }]
             }]
         }
@@ -27,7 +27,7 @@ module.exports = {
         }],
         "gulp-string-replace": [/\.js/g, ".mjs"],
         "gulp-babel": [{
-            "plugins": ["@babel/plugin-transform-modules-amd"]
+            "plugins": ["@babel/plugin-transform-modules-amd", "@babel/plugin-syntax-dynamic-import"]
         }]
     }
 }

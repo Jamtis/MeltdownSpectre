@@ -14,7 +14,9 @@ define(["exports", "../timer.js"], function (_exports, _timer) {
   let junk = 0;
 
   var _default = (async () => {
+    console.log("await timer in arf");
     const timer = await _timer.default;
+    console.log("timer resolve in arf");
     return allocReloadProbe; // return (...args) => deopt(allocReloadProbe)(...args);
 
     function allocReloadProbe(probe_index, page_size, probe_length) {

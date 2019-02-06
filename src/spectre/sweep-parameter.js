@@ -7,39 +7,39 @@ const sweepParameter = (async () => {
     
     const method_options = {
         page_size: {
-            interval: [6e3, 8e4],
-            min_step_width: 10,
+            interval: [6e4, 7e4],
+            min_step_width: 1,
             getter,
-            sample_size: 2,
+            sample_size: 25,
             integer: true,
             configuration: {
-                repetitions: 2e2,
-                min_iterations: 100,
-                max_cache_hit_number: 20,
-                speculative_repetitions: 20
+                repetitions: 2000,
+                min_iterations: 20,
+                max_cache_hit_number: 60
             }
         },
         max_cache_hit_number: {
             interval: [1, 256],
             min_step_width: 1,
             getter,
-            sample_size: 25,
+            sample_size: 30,
             integer: true,
             configuration: {
-                repetitions: 1e2,
-                page_size: 6e3,
-                min_iterations: 400
+                repetitions: 200,
+                page_size: 5e3,
+                min_iterations: 12
             }
         },
         min_iterations: {
-            interval: [1, 500],
+            interval: [1, 50],
             min_step_width: 1,
             getter,
-            sample_size: 25,
+            sample_size: 20,
             integer: true,
             configuration: {
-                repetitions: 1e2,
-                max_cache_hit_number: 16
+                repetitions: 1e3,
+                max_cache_hit_number: 60,
+                page_size: 5e3
             }
         },
         probe_length: {
@@ -104,12 +104,12 @@ const sweepParameter = (async () => {
         notify(false);
         return result[division_property];
     }
- 
+
     async function prepareTest(value) {
         await new Promise(resolve => setTimeout(resolve, 1e0));
         console.log(`%ccurrent ${method_name} ${value}`, "color:blue");
         let {
-            probe_index: address,
+            address,
             probe_length,
             page_size,
             repetitions,
@@ -136,7 +136,8 @@ const sweepParameter = (async () => {
                 sequential_results,
                 options,
                 worker: true,
-                division_property
+                division_property,
+                userAgent: navigator.userAgent
             }
         }));
         postMessage(message);

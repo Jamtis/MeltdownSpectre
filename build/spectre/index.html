@@ -1,3 +1,16 @@
 <!DOCTYPE html>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="./index.js" type="module" async></script>
+<script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
+<script type="module">
+    (async () => {
+        try {
+            if (location.pathname.indexOf("src") == -1) {
+                require(["index.js"]);
+            } else {
+                await eval(`import("./index.js")`);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    })();
+</script>

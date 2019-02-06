@@ -5,7 +5,9 @@ import timer_promise from "../timer.js";
 let junk = 0;
 
 export default (async () => {
+    console.log("await timer in arf");
     const timer = await timer_promise;
+    console.log("timer resolve in arf");
     return allocReloadProbe;
     // return (...args) => deopt(allocReloadProbe)(...args);
     

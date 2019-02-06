@@ -10,11 +10,18 @@ define(["exports"], function (_exports) {
   if (typeof Worker == "undefined") {
     // in worker in old chrome
     Timer_promise = (async () => {
+      console.log("receiving timer promise");
       const sharedbuffer = await new Promise(resolve => {
         addEventListener("message", event => {
-          resolve(event.data);
+          console.log("received", event.data);
+
+          if (event.data instanceof SharedArrayBuffer) {
+            console.log("received sb");
+            resolve(event.data);
+          }
         });
       });
+      console.log("timer promise 2");
       const array = new Uint32Array(sharedbuffer);
       const Timer = {
         restore() {
@@ -28,7 +35,7 @@ define(["exports"], function (_exports) {
         },
 
         terminate() {
-          worker.terminate();
+          postMessage("terminate");
         }
 
       };
@@ -57,33 +64,12 @@ define(["exports"], function (_exports) {
 
       };
       const promise = new Promise(resolve => {
-        worker.addEventListener("message", () => {
-          resolve(Timer);
-        });
+        worker.addEventListener("message", resolve);
         worker.postMessage(sharedbuffer);
       });
-      promise.buffer = sharedbuffer;
-      return promise;
-    })();
-  } else {
-    let begin;
-
-    Timer_promise = (async () => {
-      const {
-        hrtime
-      } = (await eval(`import("process")`)).default;
-      const Timer = {
-        restore() {
-          begin = hrtime.bigint();
-        },
-
-        load() {
-          return parseInt(hrtime.bigint() - begin);
-        },
-
-        terminate() {}
-
-      };
+      Timer.buffer = sharedbuffer;
+      console.log("release timer");
+      await promise;
       return Timer;
     })();
   }

